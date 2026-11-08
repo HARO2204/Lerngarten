@@ -6,7 +6,7 @@ const Material=(()=>{
  function guess(word){const w=word.trim().replace(/^(der|die|das|ein|eine)\s+/i,'').toLocaleLowerCase('de-AT');const index=MATERIAL_PICTURES.findIndex(x=>x.toLocaleLowerCase('de-AT')===w);return index<0?null:index}
  function valid(s){return !!s&&s.version===1&&typeof s.title==='string'&&s.title.length<=70&&['large','small'].includes(s.size)&&Number.isInteger(s.seed)&&s.seed>=0&&s.seed<100000&&Array.isArray(s.items)&&s.items.length>=2&&s.items.length<=12&&s.items.every(e=>e&&typeof e.word==='string'&&e.word.trim().length>0&&e.word.length<=40&&(e.image===null||(Number.isInteger(e.image)&&e.image>=0&&e.image<MATERIAL_PICTURES.length))&&(e.custom===null||(typeof e.custom==='string'&&e.custom.length<400000&&/^data:image\/jpeg;base64,[A-Za-z0-9+/]+={0,2}$/.test(e.custom))))&&new Set(s.items.map(e=>e.word.trim().toLocaleLowerCase('de-AT'))).size===s.items.length}
  const safe=t=>Array.from(String(t).normalize('NFC')).map(ch=>MATERIAL_METRICS[ch]?ch:ch==='\n'?'\n':'?').join('');
- const width=(t,size=14,bold=false)=>Array.from(safe(t)).reduce((n,c)=>n+(MATERIAL_METRICS[c]?.[bold?1:0]||0)*size/1000,0);
+ const width=(t,size=14,bold=false)=>LerngartenFont.active?LerngartenFont.measure(safe(t),size).width:Array.from(safe(t)).reduce((n,c)=>n+(MATERIAL_METRICS[c]?.[bold?1:0]||0)*size/1000,0);
  function wrap(t,w,size=14,bold=false){let lines=[],line='';for(const word of safe(t).split(/\s+/)){const trial=line?line+' '+word:word;if(width(trial,size,bold)<=w){line=trial;continue}if(line){lines.push(line);line=''}if(width(word,size,bold)<=w){line=word;continue}for(const c of word){if(line&&width(line+c,size,bold)>w){lines.push(line);line=''}line+=c}}if(line)lines.push(line);return lines}
  function random(seed){return()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296}}
  function shuffled(xs,seed){let a=[...xs],r=random(seed);for(let i=a.length-1;i>0;i--){let j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
@@ -32,3 +32,4 @@ const Material=(()=>{
  }
  return{defaults,valid,guess,document,svg,pdf,missing,width,modes,pictureSVG};
 })();
+

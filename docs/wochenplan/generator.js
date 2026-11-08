@@ -15,7 +15,7 @@ const Weekly=(()=>{
   return{s,topic,words,tasks};
  }
  function safe(t){return Array.from(String(t).normalize('NFC')).map(c=>WEEK_METRICS[c]?c:c==='\n'?'\n':'?').join('')}
- function width(t,size=13,bold=false){return Array.from(safe(t)).reduce((a,c)=>a+(WEEK_METRICS[c]?.[bold?1:0]||0)*size/1000,0)}
+ function width(t,size=13,bold=false){if(LerngartenFont.active)return LerngartenFont.measure(safe(t),size).width;return Array.from(safe(t)).reduce((a,c)=>a+(WEEK_METRICS[c]?.[bold?1:0]||0)*size/1000,0)}
  function wrap(t,max,size=13,bold=false){const result=[];for(const paragraph of safe(t).split('\n')){let line='';for(const word of paragraph.split(/\s+/)){const test=line?line+' '+word:word;if(width(test,size,bold)<=max){line=test;continue}if(line){result.push(line);line=''}if(width(word,size,bold)<=max){line=word;continue}for(const c of word){if(line&&width(line+c,size,bold)>max){result.push(line);line=''}line+=c}}result.push(line)}return result}
  function document(model){const{s,topic,words,tasks}=model,pages=[];let ops=[],y=0;const put=(type,o)=>ops.push({type,...o}),text=(x,top,t,size=13,bold=false)=>put('text',{x,y:top,t:safe(t),size,bold}),line=(x,top,w,color=.65,dash=false)=>put('line',{x,y:top,w,color,dash}),rect=(x,top,w,h)=>put('rect',{x,y:top,w,h}),para=(top,t,size=13,max=523,x=36,bold=false)=>{const ls=wrap(t,max,size,bold);ls.forEach((l,i)=>text(x,top+i*size*1.45,l,size,bold));return top+ls.length*size*1.45},check=(x,top,label,size=12)=>{rect(x,top-9,8,8);text(x+14,top,label,size)},heading=(top,t)=>para(top,t,14,523,36,true)+7;
  function guides(top,count=1,x=36,w=523){for(let i=0;i<count;i++){if(s.ruling){for(let j=0;j<4;j++)line(x,top+j*7,w,j===2?.42:.72,j===1);top+=37}else{line(x,top+18,w);top+=33}}return top+5}
@@ -55,3 +55,4 @@ const Weekly=(()=>{
  }
  return{defaults,valid,build,document,svg,pdf,subjects,levels,width};
 })();
+

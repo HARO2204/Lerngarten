@@ -1,0 +1,78 @@
+{
+  "quk": {
+    "title": "Qu oder K?",
+    "letters": [
+      "Qu",
+      "K"
+    ],
+    "words": [
+      "Qualle",
+      "Kanne",
+      "Quark",
+      "Kiste",
+      "Quadrat",
+      "Kuchen"
+    ],
+    "pictures": [
+      0,
+      1,
+      2,
+      3,
+      -1,
+      4
+    ],
+    "gaps": [
+      "__alle",
+      "__anne",
+      "__ark",
+      "__iste",
+      "__adrat",
+      "__uchen"
+    ],
+    "rule": "Qu klingt am Anfang dieser Wörter wie k und w. K klingt wie k. Quark heißt in Österreich Topfen.",
+    "sample": "Die Qualle schwimmt im Meer.",
+    "entries": {
+      "ruhig": "Die Eule hat einen Wörterkoffer dabei: Zeige drei Bildkarten nacheinander. Die Kinder benennen sie. Sprich Qualle und Kanne langsam vor. Frage: „Was hörst du nach dem k-Laut bei Qualle?“ Sammle Vermutungen und zeige anschließend die Wortkarten.",
+      "bewegt": "Lege Qu und K mit Abstand im Raum aus. Zeige ein Bild und nenne das Wort deutlich. Die Kinder gehen zum vermuteten Anfang. Zeige die Wortkarte; alle prüfen gemeinsam. Wer nicht gehen möchte, zeigt auf die passende Karte.",
+      "spielerisch": "Die Eule hat ihre Wortkarten durcheinandergebracht. Ziehe eine Bildkarte aus einem Beutel. Die Kinder benennen das Bild und suchen die passende Wortkarte. Sammle Qu- und K-Wörter zunächst ohne Erklärung in zwei Gruppen."
+    }
+  },
+  "spst": {
+    "title": "Sp oder St?",
+    "letters": [
+      "Sp",
+      "St"
+    ],
+    "words": [
+      "Spinne",
+      "Stern",
+      "Spiegel",
+      "Stuhl",
+      "Spaten",
+      "Stein"
+    ],
+    "pictures": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "gaps": [
+      "__inne",
+      "__ern",
+      "__iegel",
+      "__uhl",
+      "__aten",
+      "__ein"
+    ],
+    "rule": "Am Anfang dieser Wörter klingt Sp wie schp und St wie scht. Wir schreiben Sp oder St.",
+    "sample": "Die Spinne sitzt auf dem Stein.",
+    "entries": {
+      "ruhig": "Decke die Bildkarte Spinne langsam auf. Die Kinder benennen das Bild. Stelle Stern daneben. Sprich beide Wörter deutlich. Frage: „Was hörst du nach dem sch-Laut?“ Zeige anschließend Sp und St auf den Wortkarten.",
+      "bewegt": "Lege Sp und St mit Abstand im Raum aus. Sprich ein Bildwort deutlich vor. Die Kinder gehen zur passenden Gruppe. Decke die Wortkarte zur Kontrolle auf. Als ruhige Alternative zeigen die Kinder auf die Gruppe.",
+      "spielerisch": "Die Eule sucht Bild-Wort-Paare. Zeige ein Bild, die Kinder wählen aus zwei Wortkarten. Sprecht das Wort gemeinsam und legt das Paar zu Sp oder St. Ein Kind darf als Nächstes eine Karte aufdecken."
+    }
+  }
+}

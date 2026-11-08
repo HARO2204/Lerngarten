@@ -60,3 +60,9 @@ Die beiden Bildtafeln wurden für dieses Material generiert und liegen unter `do
 Unter Sachunterricht → Konflikte und Gefühle → Klassenplakate stehen drei illustrierte A4-Plakate zur Verfügung: „Unser Friedensweg“, „So hören wir zu“ und „Hier bekommen wir Hilfe“. Einzelplakate oder das Dreierpaket lassen sich drucken und als PDF herunterladen. Für das Hilfe-Plakat können zwei Ansprechpersonen und Treffpunkte eingetragen werden; leere Felder bleiben auf dem Ausdruck beschreibbar. Diese Angaben werden nicht automatisch gespeichert. Das ursprüngliche Lernpaket bleibt bei 7 Kinderseiten plus optional 2 Lehrkraftseiten.
 
 Direkter Einstieg: `docs/forschergarten/?thema=konflikte-gefuehle&material=plakate`.
+
+## Freundschaft und Zusammenhalt
+
+Achtes Sachunterrichtsthema mit neuen Illustrationen: zwei Bildergeschichten, ein Gemeinschaftsblatt, zwei wechselnde Teamaufgaben aus vier Varianten und acht freundliche Satzkarten. Das Paket umfasst 7 Kinderseiten plus optional 2 Lehrkraftseiten. Texte und Hilfen sind auf die 1./2. Schulstufe und drei Unterstützungsstufen abgestimmt. Schriftwahl, Schreiblinien, PDF und Druck werden unterstützt. Die Aussagen im Bildschirmquiz betreffen respektvolle Handlungen, keine Bewertung persönlicher Freundschaften.
+
+Direkter Einstieg: `docs/forschergarten/?thema=freundschaft-zusammenhalt`. Das Konzept und die Bildbeschreibung liegen unter `docs/forschergarten/freundschaft/`.

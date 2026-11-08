@@ -1127,5 +1127,147 @@
         "https://www.bmb.gv.at/Themen/schule/schulpraxis/schwerpunkte/gewpr/moko.html"
       ]
     ]
+  },
+  {
+    "id": "friendship",
+    "title": "Freundschaft und Zusammenhalt",
+    "category": "Ich und die Gemeinschaft",
+    "short": "Freundschaft wächst, wenn wir gern Zeit miteinander verbringen. Wir können freundlich einladen und Hilfe anbieten. Jede Person darf Nein sagen oder eine Pause machen. In unserer Klasse behandeln wir alle respektvoll.",
+    "text": "Freundinnen und Freunde verbringen gern Zeit miteinander. Sie können sich helfen, zuhören und auch unterschiedliche Wünsche haben. Niemand muss mit allen befreundet sein. Respektvoller Umgang gilt trotzdem für alle. Vor dem Helfen fragen wir, welche Hilfe gewünscht ist. Bei gemeinsamen Aufgaben hören wir alle Ideen und suchen einen Plan, an dem sich alle beteiligen können. Ein Nein zu einer Handlung heißt nicht, dass wir die Person ablehnen.",
+    "words": [
+      "einladen",
+      "zuhören",
+      "helfen",
+      "fragen",
+      "gemeinsam"
+    ],
+    "mc": [
+      [
+        "Wie kann ich freundlich einladen?",
+        [
+          "Ich frage und lasse auch ein Nein zu.",
+          "Ich bestimme, dass alle sofort mitmachen müssen.",
+          "Ich verspreche Freundschaft nur gegen ein Geschenk."
+        ],
+        0
+      ],
+      [
+        "Was mache ich, bevor ich jemandem helfe?",
+        [
+          "Ich frage, welche Hilfe gewünscht ist.",
+          "Ich nehme die Aufgabe sofort weg.",
+          "Ich entscheide alles allein."
+        ],
+        0
+      ],
+      [
+        "Ein Kind möchte sein eigenes Buch gerade nicht verleihen. Was passt?",
+        [
+          "Ich respektiere das Nein und frage nach einer anderen Möglichkeit.",
+          "Ich nehme das Buch trotzdem.",
+          "Ich sage, dass es deshalb keine Freunde haben darf."
+        ],
+        0
+      ],
+      [
+        "Was hilft bei einer Teamaufgabe?",
+        [
+          "Wir hören alle Ideen, verteilen Aufgaben und probieren unseren Plan.",
+          "Nur das schnellste Kind darf entscheiden.",
+          "Wir vergleichen, wer am beliebtesten ist."
+        ],
+        0
+      ]
+    ],
+    "judge": [
+      [
+        "Wir dürfen unterschiedliche Wünsche haben.",
+        true,
+        "Verschiedene Wünsche sind möglich. Wir gehen respektvoll damit um."
+      ],
+      [
+        "Alle Kinder müssen miteinander befreundet sein.",
+        false,
+        "Freundschaften sind freiwillig. Respekt gilt für alle."
+      ]
+    ],
+    "gaps": [
+      [
+        "Bevor ich helfe, kann ich freundlich _____.",
+        "fragen"
+      ]
+    ],
+    "match": [
+      [
+        "Einladen",
+        "Mitmachen anbieten"
+      ],
+      [
+        "Nachfragen",
+        "Wünsche besser verstehen"
+      ],
+      [
+        "Zusammenarbeiten",
+        "Ideen und Aufgaben teilen"
+      ]
+    ],
+    "open": [
+      [
+        "Wie kann ein gemeinsamer Plan fair werden?",
+        "Alle werden gehört und können passend zu ihren Möglichkeiten beitragen."
+      ]
+    ],
+    "cards": [
+      [
+        "Einladen",
+        "Möchtest du mitmachen?"
+      ],
+      [
+        "Helfen",
+        "Welche Hilfe möchtest du?"
+      ],
+      [
+        "Grenzen",
+        "Ein Nein wird respektiert."
+      ],
+      [
+        "Zuhören",
+        "Ich lasse dich ausreden."
+      ],
+      [
+        "Verschieden sein",
+        "Wir müssen nicht dasselbe mögen."
+      ],
+      [
+        "Planen",
+        "Was wollen wir ausprobieren?"
+      ]
+    ],
+    "activity": {
+      "title": "Gemeinsam etwas schaffen",
+      "question": "Wie können wir unsere Ideen verbinden?",
+      "materials": [
+        "Papier",
+        "Stifte"
+      ],
+      "steps": [
+        "Ideen sammeln.",
+        "Aufgaben gemeinsam verteilen.",
+        "Einen Plan ausprobieren.",
+        "Überlegen, was gut geholfen hat."
+      ],
+      "note": "Keine Beliebtheitsvergleiche und kein erzwungener Körperkontakt.",
+      "expected": "Mehrere Lösungen sind möglich. Wichtig sind Beteiligung und respektvoller Umgang."
+    },
+    "sources": [
+      [
+        "Bayerisches Landesjugendamt · Gemeinschaft erleben",
+        "https://www.baer.bayern.de/elternbriefe-medienbriefe/elternbriefe/ausgabe-19/beitrag/gemeinschaft-erleben.php"
+      ],
+      [
+        "UNICEF · Kinderrechte einfach erklärt",
+        "https://www.unicef.de/informieren/aktuelles/blog/einfach-erklaert/kinderrechte/389924"
+      ]
+    ]
   }
 ]

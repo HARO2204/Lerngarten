@@ -23,7 +23,7 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 let measureContext;
 function width(text,size,bold=false){if(window.LerngartenFont?.active)return LerngartenFont.measure(text,size).width;measureContext ||= document.createElement('canvas').getContext('2d');measureContext.font=(bold?'bold ':'')+size+'px Arial';return measureContext.measureText(text).width}
 function wrap(text,max,size,bold=false){const lines=[];for(const paragraph of String(text).split('\n')){let line='';for(const word of paragraph.split(/\s+/)){const next=line?line+' '+word:word;if(width(next,size,bold)<=max){line=next;continue}if(line)lines.push(line);line='';for(const ch of word){if(line&&width(line+ch,size,bold)>max){lines.push(line);line=''}line+=ch}}lines.push(line)}return lines}
-function page(title,kicker,d,{names=true}={}){
+function page(title,kicker,d,{names=true,poster=false}={}){
 let out='',bottom=0;const color='#243e35';
 const text=(x,y,t,size=12,bold=false,fill=color)=>{bottom=Math.max(bottom,y+3);out+=`<text x="${x}" y="${y}" font-family="Arial,sans-serif" font-size="${size}" font-weight="${bold?700:400}" fill="${fill}">${esc(t)}</text>`};
 const rect=(x,y,w,h,fill='#fff',stroke='#cad3c3',radius=7)=>{bottom=Math.max(bottom,y+h);out+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${radius}" fill="${fill}" stroke="${stroke}"/>`};
@@ -31,10 +31,53 @@ const line=(x,y,w,dashed=false)=>{bottom=Math.max(bottom,y);out+=`<line x1="${x}
 const para=(x,y,t,max=515,size=12,bold=false,leading=1.45)=>{const lines=wrap(t,max,size,bold);lines.forEach((s,i)=>text(x,y+i*size*leading,s,size,bold));return y+lines.length*size*leading};
 const art=(index,x,y,w,h,scene=false)=>{const cols=scene?2:4,cellW=1536/cols,cellH=512,src=scene?'gefuehle/konfliktszenen.jpg':'gefuehle/gefuehlsbilder.jpg';out+=`<svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="${index%cols*cellW+(scene?0:12)} ${Math.floor(index/cols)*cellH+(scene?0:8)} ${cellW-(scene?0:24)} ${cellH-(scene?0:16)}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${esc(scene?cases[index].title:'Illustration: '+emotions[index].name)}"><image href="${src}" width="1536" height="1024"/></svg>`;bottom=Math.max(bottom,y+h)};
 const writing=(x,y,count=1,w=515)=>{for(let n=0;n<count;n++){if(d.ruling){for(let j=0;j<4;j++)line(x,y+j*7,w,j===1);y+=34}else{line(x,y+18,w);y+=30}}return y};
-rect(0,0,595.28,841.89,'#fff','#fff',0);bottom=0;text(40,35,'FORSCHERGARTEN · '+kicker,8.5,true,'#667354');text(40,68,title,23,true);text(40,91,d.grade+'. Klasse · '+['Mit viel Hilfe','Mit wenig Hilfe','Selbstständig'][d.level-1],10,false,'#65715d');line(40,104,515);if(names)text(40,127,'Name: ___________________________     Datum: _________________',10);
-return {text,para,rect,line,art,writing,finish(){if(bottom>791)throw Error('Ein Gefühle-Blatt benötigt zu viel Platz. Bitte eine kürzere Schrift wählen.');return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595.28 841.89" role="img" aria-label="${esc(title)}"><title>${esc(title)}</title>${out}<text x="40" y="818" font-family="Arial,sans-serif" font-size="8" fill="#64705d">Lerngarten · Konflikte und Gefühle · Erzählen ist freiwillig.</text></svg>`}};
+rect(0,0,595.28,841.89,'#fff','#fff',0);bottom=0;text(40,35,'FORSCHERGARTEN · '+kicker,8.5,true,'#667354');text(40,68,title,poster?Math.min(32,515/Math.max(1,width(title,1,true))):23,true);if(!poster)text(40,91,d.grade+'. Klasse · '+['Mit viel Hilfe','Mit wenig Hilfe','Selbstständig'][d.level-1],10,false,'#65715d');line(40,104,515);if(names)text(40,127,'Name: ___________________________     Datum: _________________',10);
+return {text,para,rect,line,art,writing,finish(){if(bottom>791)throw Error('Ein Gefühle-Blatt benötigt zu viel Platz. Bitte eine kürzere Schrift wählen.');return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595.28 841.89" role="img" aria-label="${esc(title)}"><title>${esc(title)}</title>${out}<text x="40" y="818" font-family="Arial,sans-serif" font-size="8" fill="#64705d">${poster?'Lerngarten · Gemeinsam lernen. Gemeinsam wachsen.':'Lerngarten · Konflikte und Gefühle · Erzählen ist freiwillig.'}</text></svg>`}};
 }
-function pages(d,kinds=['worksheet','activity','cards'],teacher=false){const result=[],guided=d.level===1||d.grade===1,independent=d.level===3,choice=cases[d.variant%cases.length];d={...d,ruling:!!d.ruling};let p,y;
+const posterKinds=['peace','listening','help'];
+function posters(d){
+const choice=posterKinds.includes(d.posterType)?[d.posterType]:posterKinds,result=[];
+for(const kind of choice){const p=page({peace:'Unser Friedensweg',listening:'So hören wir zu',help:'Hier bekommen wir Hilfe'}[kind],'UNSERE KLASSENPLAKATE',d,{names:false,poster:true});
+if(kind==='peace'||kind==='listening'){
+p.para(40,128,kind==='peace'?'Wir suchen eine Lösung, die für beide passt.':'Du bist wichtig. Deine Worte und Zeichen zählen.',515,15.5);
+const rules=kind==='peace'?[
+[2,'Stopp und Abstand','Hände bleiben bei mir.\nIch darf eine Pause machen.'],
+[7,'Ich erzähle','„Ich bin … . Mir ist … wichtig.“\nDu erzählst auch.'],
+[4,'Wir hören zu','Wir lassen uns ausreden.\n„Habe ich dich richtig verstanden?“'],
+[0,'Wir finden eine Idee','Beide dürfen zustimmen.\nSpäter prüfen wir: Klappt es?']
+]:[
+[7,'Ich lasse dich ausreden.','Du darfst in deinem Tempo erzählen.'],
+[4,'Ich frage freundlich nach.','„Wie meinst du das?“'],
+[6,'Ich achte auf Worte und Zeichen.','Du darfst auch zeigen, malen oder passen.'],
+[0,'Ich frage, ob ich dich verstehe.','„Du meinst … . Stimmt das?“']
+];
+rules.forEach((rule,i)=>{const top=154+i*125;p.rect(40,top,515,114,i%2?'#faf2e4':'#edf2e5','#c5d0ba',12);p.art(rule[0],48,top+6,78,100);p.text(140,top+32,(i+1)+' · '+rule[1],kind==='peace'?19:17,true);p.para(140,top+58,rule[2],400,15.5,false,1.4)});
+p.rect(40,672,515,110,'#f4e7d8','#d4bfa5',12);
+p.para(56,701,kind==='peace'?'Alle Gefühle sind erlaubt.\nVerletzen ist nicht erlaubt.':'Wir dürfen verschieden fühlen.\nWir müssen nicht dasselbe denken.',483,18,true,1.35);
+p.text(56,763,kind==='peace'?'Hilfe holen ist immer erlaubt.':'Du darfst sagen: „Ich brauche eine Pause.“',14.5);
+}else{
+p.art(1,42,118,76,105);p.art(3,476,118,76,105);
+p.para(135,148,'Du musst damit\nnicht allein bleiben.',330,23,true,1.3);
+const steps=['Ich gehe an einen sicheren Ort.','Ich suche eine erwachsene Person.','Ich sage: „Ich brauche Hilfe.“'];
+steps.forEach((line,i)=>{const y=245+i*44;p.text(43,y,String(i+1),19,true,'#7a6646');p.text(70,y,line,19,true)});
+p.para(40,387,'Hier finden wir Unterstützung:',515,17,true);
+for(let i=0;i<2;i++){
+const top=405+i*112,person=String(d.helpContacts?.[i]?.name||'').trim().slice(0,48),place=String(d.helpContacts?.[i]?.place||'').trim().slice(0,60);
+p.rect(40,top,515,101,i?'#faf2e4':'#edf2e5','#c5d0ba',10);
+p.text(56,top+21,'Name oder Rolle',11.5,false,'#607153');
+if(person)p.text(56,top+47,person,Math.min(21,475/Math.max(1,width(person,1,true))),true);else p.line(56,top+49,483);
+p.text(56,top+71,'Ort / so finden wir Hilfe',11.5,false,'#607153');
+if(place)p.text(56,top+91,place,Math.min(16,475/Math.max(1,width(place,1))));else p.line(216,top+87,323);
+}
+p.rect(40,651,515,131,'#f4e7d8','#d4bfa5',12);
+p.para(56,680,'Wenn du noch keine Hilfe bekommst:',483,17.5,true);
+p.para(56,709,'Suche eine weitere erwachsene Person.\nHilfe holen ist kein Petzen.',483,18,false,1.45);
+}
+result.push(p.finish());
+}
+return result;
+}
+function pages(d,kinds=['worksheet','activity','cards'],teacher=false){if(kinds.includes('posters'))return posters(d);const result=[],guided=d.level===1||d.grade===1,independent=d.level===3,choice=cases[d.variant%cases.length];d={...d,ruling:!!d.ruling};let p,y;
 if(kinds.includes('worksheet')){
 p=page('Gefühle entdecken','1 · WAHRNEHMEN & BENENNEN',d);y=p.para(40,154,'Alle Gefühle dürfen da sein. Die Bilder sind Vorschläge. Du darfst ein Bild anders deuten.',515,12);
 for(let i=0;i<8;i++){let x=40+i%4*130,top=192+Math.floor(i/4)*170;p.rect(x,top,125,161,'#fbf7ec');p.art(i,x+10,top+7,105,116);p.text(x+10,top+143,emotions[i].name,12,true)}
@@ -78,5 +121,5 @@ p.text(40,y,'Fachliche Orientierung · eigene Unterrichtsausarbeitung',12,true);
 return result;
 }
 function explorer(container){container.replaceChildren();const details=document.createElement('details');details.className='feelings-explorer';const summary=document.createElement('summary');summary.textContent='Gefühle am Bildschirm erkunden';details.append(summary);const intro=document.createElement('p');intro.textContent='Wähle eine Bildkarte. Wir vermuten, statt Gefühle zu erraten. Du musst hier nichts über dich selbst erzählen.';details.append(intro);const grid=document.createElement('div');grid.className='feelings-buttons';const info=document.createElement('p');info.className='feelings-info';info.setAttribute('role','status');for(let i=0;i<emotions.length;i++){const e=emotions[i],button=document.createElement('button');button.type='button';button.setAttribute('aria-pressed','false');const art=document.createElement('span');art.className='feelings-portrait';art.style.backgroundPosition=(i%4*100/3)+'% '+(Math.floor(i/4)*100)+'%';const title=document.createElement('span');title.textContent=e.name;button.append(art,title);button.onclick=()=>{for(const b of grid.querySelectorAll('button'))b.setAttribute('aria-pressed',String(b===button));info.textContent=e.name+': '+e.signal+' Das kann bei jedem Menschen anders sein. '+e.help};grid.append(button)}details.append(grid,info);container.append(details)}
-return {topic,emotions,cases,pages,explorer};
+return {topic,emotions,cases,pages,explorer,posterKinds};
 })();

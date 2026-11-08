@@ -54,3 +54,9 @@ Im Sachunterricht als siebtes Thema auswählbar; direkter Einstieg:
 Enthält 7 illustrierte Kinderseiten und optional 2 Lehrkraftseiten: Gefühlsübersicht, Konfliktlabor mit vier wechselnden Fällen, Friedensweg, Situationskarten, acht Gefühlskarten und sechs Hilfekarten. Drei Unterstützungsstufen, beide Schulstufen, Schreiblinien sowie eigene Schrift werden berücksichtigt. Persönliche Gefühle werden nicht gespeichert oder bewertet; das Bildschirmquiz fragt nur nach hilfreichen Handlungen.
 
 Die beiden Bildtafeln wurden für dieses Material generiert und liegen unter `docs/forschergarten/gefuehle/`. Webansicht, Druck und 300-dpi-PDF verwenden dieselbe SVG-Seitenaufteilung. Die bestehenden sechs Themen und deren Startpaket bleiben erhalten. Das Unterrichtskonzept mit Lernfolge und Quellen steht in `docs/forschergarten/gefuehle/konzept.md`.
+
+### Klassenplakate
+
+Unter Sachunterricht → Konflikte und Gefühle → Klassenplakate stehen drei illustrierte A4-Plakate zur Verfügung: „Unser Friedensweg“, „So hören wir zu“ und „Hier bekommen wir Hilfe“. Einzelplakate oder das Dreierpaket lassen sich drucken und als PDF herunterladen. Für das Hilfe-Plakat können zwei Ansprechpersonen und Treffpunkte eingetragen werden; leere Felder bleiben auf dem Ausdruck beschreibbar. Diese Angaben werden nicht automatisch gespeichert. Das ursprüngliche Lernpaket bleibt bei 7 Kinderseiten plus optional 2 Lehrkraftseiten.
+
+Direkter Einstieg: `docs/forschergarten/?thema=konflikte-gefuehle&material=plakate`.

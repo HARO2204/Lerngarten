@@ -66,3 +66,12 @@ Direkter Einstieg: `docs/forschergarten/?thema=konflikte-gefuehle&material=plaka
 Achtes Sachunterrichtsthema mit neuen Illustrationen: zwei Bildergeschichten, ein Gemeinschaftsblatt, zwei wechselnde Teamaufgaben aus vier Varianten und acht freundliche Satzkarten. Das Paket umfasst 7 Kinderseiten plus optional 2 Lehrkraftseiten. Texte und Hilfen sind auf die 1./2. Schulstufe und drei Unterstützungsstufen abgestimmt. Schriftwahl, Schreiblinien, PDF und Druck werden unterstützt. Die Aussagen im Bildschirmquiz betreffen respektvolle Handlungen, keine Bewertung persönlicher Freundschaften.
 
 Direkter Einstieg: `docs/forschergarten/?thema=freundschaft-zusammenhalt`. Das Konzept und die Bildbeschreibung liegen unter `docs/forschergarten/freundschaft/`.
+
+## Themenwochen zu Gefühlen und Freundschaft
+
+Die beiden sozialen Themen stehen auch unter `docs/wochenplan.html` zur Verfügung. Die Startvorlagen wählen Lesen, Schreiben, Sachunterricht und Gemeinschaft mit 4 Pflichtaufgaben und 2 Wahlangeboten (1 davon bearbeiten). Mathematik ist optional. Neben dem Aufgabenplan entsteht ein Vorschlag von Montag bis Freitag mit Verweisen auf die tatsächlich ausgewählten Aufgaben und deren Pflicht-/Wahlstatus. Aufgaben, Hilfen und Lösungen beziehen sich auf die jeweilige Geschichte. Persönliche Gefühle und Freundschaften werden nicht bewertet.
+
+Plan, Wochenablauf, Arbeitsblätter und Lehrkraftmaterial lassen sich in der Vorschau wählen, als PDF exportieren sowie als Entwurf sichern und wieder öffnen. Bestehende Themenindizes bleiben stabil. Die Bilder stammen aus den bereits eingebetteten Sachunterrichtsmaterialien. Für soziale Themen verwendet der PDF-Export dieselbe illustrierte Seitenaufteilung wie die Vorschau. Lernwörter aus diesen Wochen lassen sich auch in der Materialwerkstatt übernehmen.
+
+- `docs/wochenplan.html?thema=konflikte-gefuehle`
+- `docs/wochenplan.html?thema=freundschaft-zusammenhalt`

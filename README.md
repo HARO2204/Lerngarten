@@ -42,7 +42,7 @@ In jedem Lernbereich **Meine Schreibschrift** öffnen und eine **TTF-, OTF-, WOF
 
 Die **Schrift-Werkstatt** unter `schreibgarten/druckschrift.html` unterstützt eigene Buchstaben, Wörter und Sätze, Nachspuren, kräftige Vorlagen, leere Linien, gemischte Schriften je Zeile, Wiederholungen, 3–6 mm Linienbänder und Hoch-/Querformat. Schreibschrift bleibt beim Zeichnen als zusammenhängender Text erhalten, einschließlich der von der Schrift unterstützten Ligaturen. PDF-Export: 300-dpi-Seitenbilder ohne erforderliche Schriftinstallation am Druckgerät. Druckschrift-PDFs bleiben vektorbasiert.
 
-Auch Lernwörter, Diktat-Woche, Wortarten, Rechtschreibung, Satzbau, Wochenpakete, Lesen, Mathematik, Detektivmission, Sachunterricht und Lehrerbereich verwenden die ausgewählte Schrift für die erstellten Vorlagen. Die Materialwerkstatt und die Lernwoche exportieren eigene Schrift direkt als PDF; die übrigen Arbeitsblattgeneratoren verwenden bei eigener Schrift den Browser-Druckdialog (**Als PDF sichern**). Fertige Beispiel-PDFs werden nicht umgeschrieben.
+Auch Lernwörter, Diktat-Woche, Wortarten, Rechtschreibung, Satzbau, Wochenpakete, Lesen, Mathematik, Detektivmission, Sachunterricht und Lehrerbereich verwenden die ausgewählte Schrift für die erstellten Vorlagen. Die Materialwerkstatt und die Lernwoche exportieren eigene Schrift direkt als PDF; Mathe-Mix, Zahlenwerkstatt und Diktat-Woche exportieren ebenfalls direkt als PDF. Die übrigen Arbeitsblattgeneratoren verwenden bei eigener Schrift den Browser-Druckdialog (**Als PDF sichern**). Fertige Beispiel-PDFs werden nicht umgeschrieben.
 
 Entwurfsdateien enthalten keine Schriftdatei. Auf einem anderen Gerät dieselbe Schrift erneut laden. Verbindungen, Umlaute, ß und Zeilenhöhe vor dem Drucken prüfen; das Ergebnis hängt von den Zeichen und Verbindungen in der eigenen Schrift ab.
 
@@ -75,3 +75,12 @@ Plan, Wochenablauf, Arbeitsblätter und Lehrkraftmaterial lassen sich in der Vor
 
 - `docs/wochenplan.html?thema=konflikte-gefuehle`
 - `docs/wochenplan.html?thema=freundschaft-zusammenhalt`
+
+
+## Flexible Mathematik und A4-Vorlagen
+
+Im Mathegarten lassen sich Plus, Minus, Lückenaufgaben, Nachbarzahlen, Zahlenfolgen, Kopfrechenschlangen, Rechenhäuser, Zahlenpyramiden, verliebte Zahlen und Sachaufgaben frei mischen. Jede Aufgabenart erhält eine eigene Anzahl; Zahlenräume 10, 20, 50, 100 und 1000 sowie drei Hilfestufen sind wählbar. Verliebte Zahlen ergänzen sich immer zu 10. Die Mischung kann lokal als JSON gespeichert und wieder geöffnet werden. Arbeitsblätter und zugehörige Lösungen verteilen sich auf feste A4-Seiten statt auf eine Seite verkleinert zu werden.
+
+Die Zahlenwerkstatt unter `docs/mathegarten/zahlenwerkstatt.html` bietet Zahlenstrahlen, Rechensprünge, Stellenwerttabellen und Materialbilder bis 1000. Gleichmäßige Abstände und Stellenwerte werden rechnerisch erzeugt; Lösungen sind optional.
+
+Die Diktat-Woche bleibt mit sechs Lernwörtern und fünf Tagen auf genau einer A4-Seite im Querformat. Die Höhe des vierlinigen Schreibbands ist auf 9, 12, 15 oder 18 mm einstellbar (Abstand zwischen benachbarten Linien 3 bis 6 mm). Vorschau und PDF verwenden dieselbe feste Geometrie.

@@ -1,6 +1,6 @@
 /* Shared outline layout for screen, print and vector PDF. All distances are mm. */
 const Handwriting=(()=>{
- const defaultState=()=>({version:1,title:'Meine Druckschrift',instruction:'Spure nach. Schreibe dann selbst weiter.',font:'print',mode:'trace',band:5,blanks:1,repeats:1,shade:0.68,dashed:true,orientation:'portrait',entries:[{text:'die Wiese',font:'print',mode:'trace'},{text:'Die Biene fliegt zur Blume.',font:'print',mode:'trace'}]});
+ const defaultState=()=>({version:1,title:'Schreibübung',instruction:'Spure nach. Schreibe dann selbst weiter.',font:'print',mode:'trace',band:5,blanks:1,repeats:1,shade:0.68,dashed:true,orientation:'portrait',entries:[{text:'die Wiese',font:'print',mode:'trace'},{text:'Die Biene fliegt zur Blume.',font:'print',mode:'trace'}]});
  const font=k=>k==='custom'?{upem:1000,xheight:Math.max(100,LerngartenFont.measure('x',1000).actualBoundingBoxAscent||500)}:FONTDATA[k]||FONTDATA.print;
  function glyph(ch,k){const f=font(k);return f.glyphs[ch]||f.glyphs['?']}
  function chars(t){return Array.from(String(t).normalize('NFC').replace(/\t/g,'    '))}

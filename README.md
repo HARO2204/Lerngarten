@@ -45,3 +45,12 @@ Die **Schrift-Werkstatt** unter `schreibgarten/druckschrift.html` unterstützt e
 Auch Lernwörter, Diktat-Woche, Wortarten, Rechtschreibung, Satzbau, Wochenpakete, Lesen, Mathematik, Detektivmission, Sachunterricht und Lehrerbereich verwenden die ausgewählte Schrift für die erstellten Vorlagen. Die Materialwerkstatt und die Lernwoche exportieren eigene Schrift direkt als PDF; die übrigen Arbeitsblattgeneratoren verwenden bei eigener Schrift den Browser-Druckdialog (**Als PDF sichern**). Fertige Beispiel-PDFs werden nicht umgeschrieben.
 
 Entwurfsdateien enthalten keine Schriftdatei. Auf einem anderen Gerät dieselbe Schrift erneut laden. Verbindungen, Umlaute, ß und Zeilenhöhe vor dem Drucken prüfen; das Ergebnis hängt von den Zeichen und Verbindungen in der eigenen Schrift ab.
+
+## Konflikte und Gefühle
+
+Im Sachunterricht als siebtes Thema auswählbar; direkter Einstieg:
+`docs/forschergarten/?thema=konflikte-gefuehle`.
+
+Enthält 7 illustrierte Kinderseiten und optional 2 Lehrkraftseiten: Gefühlsübersicht, Konfliktlabor mit vier wechselnden Fällen, Friedensweg, Situationskarten, acht Gefühlskarten und sechs Hilfekarten. Drei Unterstützungsstufen, beide Schulstufen, Schreiblinien sowie eigene Schrift werden berücksichtigt. Persönliche Gefühle werden nicht gespeichert oder bewertet; das Bildschirmquiz fragt nur nach hilfreichen Handlungen.
+
+Die beiden Bildtafeln wurden für dieses Material generiert und liegen unter `docs/forschergarten/gefuehle/`. Webansicht, Druck und 300-dpi-PDF verwenden dieselbe SVG-Seitenaufteilung. Die bestehenden sechs Themen und deren Startpaket bleiben erhalten. Das Unterrichtskonzept mit Lernfolge und Quellen steht in `docs/forschergarten/gefuehle/konzept.md`.

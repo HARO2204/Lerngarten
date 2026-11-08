@@ -980,5 +980,152 @@
         "https://www.dlr.de/de/next/schule-und-ausbildung/lernmodule/erde-sonne-und-mond"
       ]
     ]
+  },
+  {
+    "id": "feelings",
+    "title": "Konflikte und Gefühle",
+    "category": "Ich und die Gemeinschaft",
+    "short": "Alle Gefühle dürfen da sein. Wir dürfen niemanden verletzen. Wenn ein Streit zu groß wird, machen wir eine Pause und holen Hilfe. Danach hören wir einander zu und suchen eine faire Lösung.",
+    "text": "Gefühle geben uns Hinweise darauf, wie es uns gerade geht. Menschen können in derselben Situation unterschiedlich fühlen. Wir können ein Gefühl nicht sicher an einem Gesicht ablesen: Wir dürfen freundlich nachfragen. Bei einem Streit helfen eine sichere Pause, Zuhören und eine gemeinsame Vereinbarung. Wenn jemand Angst hat, verletzt oder immer wieder ausgeschlossen wird, müssen Erwachsene helfen.",
+    "words": [
+      "Gefühl",
+      "Pause",
+      "zuhören",
+      "fair",
+      "Hilfe"
+    ],
+    "mc": [
+      [
+        "Was gilt für Wut?",
+        [
+          "Ich darf wütend sein und bleibe dabei fair.",
+          "Wenn ich wütend bin, darf ich hauen.",
+          "Wut darf niemand spüren."
+        ],
+        0
+      ],
+      [
+        "Wie erfahre ich, wie es jemandem geht?",
+        [
+          "Ich frage freundlich und akzeptiere auch keine Antwort.",
+          "Ich weiß es sicher am Gesicht.",
+          "Ich bestimme das Gefühl."
+        ],
+        0
+      ],
+      [
+        "Was hilft, wenn ein Streit gerade zu groß wird?",
+        [
+          "Abstand nehmen und eine vertraute erwachsene Person holen.",
+          "Immer lauter werden.",
+          "Allein bleiben müssen."
+        ],
+        0
+      ],
+      [
+        "Was macht eine Vereinbarung fair?",
+        [
+          "Beide können zustimmen. Später prüfen sie, ob es klappt.",
+          "Nur das lauteste Kind entscheidet.",
+          "Eine Entschuldigung wird erzwungen."
+        ],
+        0
+      ]
+    ],
+    "judge": [
+      [
+        "Alle dürfen verschieden fühlen.",
+        true,
+        "Menschen können unterschiedlich fühlen."
+      ],
+      [
+        "Wut erlaubt es, jemanden zu verletzen.",
+        false,
+        "Gefühle sind erlaubt; verletzendes Handeln wird gestoppt."
+      ]
+    ],
+    "gaps": [
+      [
+        "Wenn der Streit zu groß wird, hole ich _____.",
+        "Hilfe"
+      ]
+    ],
+    "match": [
+      [
+        "Stopp",
+        "eine Grenze zeigen"
+      ],
+      [
+        "Zuhören",
+        "andere ausreden lassen"
+      ],
+      [
+        "Nachfragen",
+        "Vermutungen überprüfen"
+      ]
+    ],
+    "open": [
+      [
+        "Was könnte beiden Kindern helfen?",
+        "Mehrere Lösungen sind möglich, wenn beide sicher sind und zustimmen können."
+      ]
+    ],
+    "cards": [
+      [
+        "Freude",
+        "Ich kann die Freude teilen oder sie in Ruhe genießen."
+      ],
+      [
+        "Traurigkeit",
+        "Vielleicht helfen Trost, Nähe oder etwas Zeit für mich."
+      ],
+      [
+        "Wut",
+        "Ich darf wütend sein. Ich bleibe mit Händen und Worten fair."
+      ],
+      [
+        "Angst",
+        "Ich darf Schutz suchen und eine vertraute Person holen."
+      ],
+      [
+        "Überraschung",
+        "Ich darf nachfragen: Was ist gerade passiert?"
+      ],
+      [
+        "Ekel",
+        "Ich darf Abstand nehmen und freundlich sagen, was ich nicht mag."
+      ]
+    ],
+    "activity": {
+      "title": "Unser Friedensweg",
+      "question": "Wie finden wir eine faire Lösung?",
+      "materials": [
+        "Bildkarten",
+        "Papier",
+        "Stifte"
+      ],
+      "steps": [
+        "Stopp und Abstand.",
+        "Gefühle und Anliegen erzählen.",
+        "Zuhören und nachfragen.",
+        "Ideen sammeln und eine Vereinbarung ausprobieren."
+      ],
+      "note": "Hilfe holen ist immer erlaubt. Persönliches Erzählen und Rollenspiel sind freiwillig.",
+      "expected": "Kinder erproben sichere Pausen, Zuhören und faire Vereinbarungen. Mehrere Antworten sind möglich."
+    },
+    "sources": [
+      [
+        "Bayerisches Landesjugendamt · Streit unter Kindern",
+        "https://www.baer.bayern.de/elternbriefe-medienbriefe/elternbriefe/ausgabe-17/beitrag/streit-unter-kindern.php"
+      ],
+      [
+        "Schulpsychologie Österreich · Mobbing",
+        "https://www.schulpsychologie.at/gesundheitsfoerderung/gewaltpraevention-1/mobbing"
+      ],
+      [
+        "Bildungsministerium · Mobbing oder Konflikt",
+        "https://www.bmb.gv.at/Themen/schule/schulpraxis/schwerpunkte/gewpr/moko.html"
+      ]
+    ]
   }
 ]

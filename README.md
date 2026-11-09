@@ -84,3 +84,10 @@ Im Mathegarten lassen sich Plus, Minus, Lückenaufgaben, Nachbarzahlen, Zahlenfo
 Die Zahlenwerkstatt unter `docs/mathegarten/zahlenwerkstatt.html` bietet Zahlenstrahlen, Rechensprünge, Stellenwerttabellen und Materialbilder bis 1000. Gleichmäßige Abstände und Stellenwerte werden rechnerisch erzeugt; Lösungen sind optional.
 
 Die Diktat-Woche bleibt mit sechs Lernwörtern und fünf Tagen auf genau einer A4-Seite im Querformat. Die Höhe des vierlinigen Schreibbands ist auf 9, 12, 15 oder 18 mm einstellbar (Abstand zwischen benachbarten Linien 3 bis 6 mm). Vorschau und PDF verwenden dieselbe feste Geometrie.
+
+## Rätselgarten und Matheolympiade
+
+- `docs/raetselgarten/`: „Das verschwundene Gartentor“, eine kooperative Mission für die 2. Klasse. Vier Stationen verbinden Lesen, Rechnen, Geheimschrift und Pflanzenwachstum. Neue Rätselsätze, Zahlenräume 20/50/100, Codeprüfung am Bildschirm, gestufte Hilfen und A4-PDF. Kinderbasis: drei Seiten; optional Hilfen, Urkunde sowie zwei Lehrkraftseiten mit Lösungen, Ablauf und Schlussgeschichte. Die Titelillustration wurde eigens generiert; genaue Rätselhinweise und Wachstumskarten entstehen als SVG.
+- `docs/olympiade/`: Matheolympiade mit 13 frei wählbaren Themen, Zahlenräumen 20/50/100 und drei Hilfestufen. Jede Station ist eine A4-Seite. Laufzettel, Tipps, Urkunde, Ablauf und Lösungen sind zuschaltbar; Lösungen sind zusätzlich separat als PDF abrufbar. Auswahl und Aufgabensatz lassen sich lokal als JSON sichern und wieder öffnen. Die Stationen verwenden dieselben geprüften Modelle wie Mathe-Mix und Zahlenwerkstatt; eine optionale Titelangabe erlaubt Stationsüberschriften ohne Verhaltensänderung am bestehenden Mathe-Mix.
+
+Beide Bereiche sind auf der Startseite verlinkt. Pädagogische Konzepte und Durchführung stehen jeweils in `konzept.md`. Eigene Schriftdateien bleiben weiterhin ausschließlich im Browser. Die erzeugten Seiten verwenden den bestehenden Font- und PDF-Export.

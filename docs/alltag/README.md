@@ -1,0 +1,10 @@
+# Alltagshelfer
+
+Vier wiederverwendbare Werkzeuge unter `docs/alltag/`. Direktlinks: `#day`, `#wheel`, `#search`, `#cross`.
+
+- Tagesplan: 1–8 frei bearbeitbare Blöcke mit zehn Bildsymbolen, freiwilligen Uhrzeiten, Ziel, Material und Erinnerung. Reihenfolge per Pfeiltasten ändern. Große Tafelansicht mit rückgängig machbaren Erledigt-Markierungen. JSON sichern/öffnen und als nächsten Wochentag übernehmen (Wochenenden überspringen; Feiertage nicht automatisch). Der Druck ist eine feste A4-Seite; zu lange Notizen werden mit einer klaren Meldung zurückgewiesen.
+- Glücksrad: 2–50 eigene Einträge, gleiche Chance pro Eintrag, optional gezogenen Eintrag entfernen. Mehrfache Einträge gewichten entsprechend. Die Auswahl verwendet `crypto.getRandomValues` mit Rejection Sampling; Ergebnis und Zeigerposition stimmen überein. Reduzierte Bewegung wird beachtet. Bei nur einem verbliebenen Eintrag ist kein weiterer Dreh nötig.
+- Wörtersuche: 1–18 Wörter, Gitter 12–20 Felder, optional Rückwärtsrichtungen. Jedes eingegebene Wort wird platziert; bei fehlendem Platz gibt es eine Fehlermeldung. Lösungen markieren alle passenden Vorkommen in den gewählten Suchrichtungen, einschließlich zufällig entstandener weiterer Treffer.
+- Kreuzworträtsel: 1–10 Antworten mit selbst formulierten Hinweisen (`Wort | Hinweis`). Wörter werden durch gemeinsame Buchstaben verbunden; nicht verbindbare Wörter bilden ausdrücklich benannte getrennte Gruppen. Alle Wörter bleiben enthalten. Gitter, Hinweisblatt/-blätter und optional ausgefüllte Lösung verwenden dieselbe Platzierung und Nummerierung. Nur waagrechte und senkrechte Wörter.
+
+Ä, Ö und Ü bleiben erhalten. ß wird bei der Großschreibung SS. Leerzeichen und Bindestriche werden im Rätselwort entfernt. Wortlängen und doppelte Einträge werden geprüft. Beide Rätselarten haben feste A4-Seiten für Vorschau, Druck und PDF. Vorlagen bleiben lokal im Browser; keine Schülerdaten werden an GitHub übertragen. Eigene Schrift und PDF-Export nutzen das bestehende Modul `schriften/eigene-schrift.js`.

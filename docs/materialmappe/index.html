@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sammle deine Unterrichtsblätter aus dem Lerngarten und lade sie gemeinsam als A4-Paket herunter.">
+  <title>Materialmappe · Lerngarten</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="sammlung.js"></script>
+  <script defer src="mappe.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="../">✳ Lerngarten</a><a href="../">Alle Lernbereiche</a></header>
+  <main>
+    <section class="intro">
+      <h1>Materialmappe</h1>
+      <p>Stell deine Arbeitsblätter in der gewünschten Reihenfolge zusammen.</p>
+    </section>
+    <div class="layout">
+      <aside class="panel">
+        <h2>Material hinzufügen</h2>
+        <p>Wähle in einem Lernbereich „Zur Mappe hinzufügen“.</p>
+        <ul class="sources">
+          <li><a href="../lesegarten/">Lesegarten öffnen</a></li>
+          <li><a href="../mathegarten/">Mathegarten öffnen</a></li>
+          <li><a href="../englisch/">Englischgarten öffnen</a></li>
+        </ul>
+        <p class="small">Die Mappe wird in diesem Browser gespeichert.</p>
+      </aside>
+      <section class="collection" aria-labelledby="collectionTitle">
+        <h2 id="collectionTitle">Deine Materialien</h2>
+        <p id="count" class="small" hidden></p>
+        <div class="toolbar">
+          <button id="worksheets" class="primary" type="button" disabled>A4-Paket herunterladen</button>
+          <button id="solutions" type="button" disabled>Lösungen herunterladen</button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+        <ol id="materials" class="materials"></ol>
+        <p id="empty" class="empty" hidden>Hier erscheinen die Blätter, die du zur Mappe hinzufügst.</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

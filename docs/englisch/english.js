@@ -300,5 +300,26 @@
     downloadPdf(EnglishDialogues.pages, filename, get('dialoguePrintStatus'), get('dialoguePdf'));
   });
 
+  MaterialMappe.bindAdd(get('worksheetToFolder'), get('worksheetFolderStatus'), () => {
+    const topic = currentTopic();
+    return {
+      title: topic.title,
+      area: 'Englischgarten',
+      worksheets: [worksheetPage(topic, false)],
+      solutions: [worksheetPage(topic, true)]
+    };
+  });
+
+  MaterialMappe.bindAdd(get('dialogueToFolder'), get('dialogueFolderStatus'), () => {
+    const dialogue = get('dialogueTopic');
+    const title = dialogue.selectedOptions[0].textContent;
+    const item = dialogue.value === 'school' ? ' · ' + get('dialogueObject').selectedOptions[0].textContent : '';
+    return {
+      title: title + item,
+      area: 'Englischgarten · Mini-Dialoge',
+      worksheets: EnglishDialogues.pages()
+    };
+  });
+
   showView('cards');
 })();

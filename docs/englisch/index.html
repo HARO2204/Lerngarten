@@ -11,7 +11,8 @@
   <script defer src="audio.js"></script>
   <script defer src="dialogue-audio.js"></script>
   <script defer src="dialogues.js"></script>
-  <script defer src="english.js?v=2"></script>
+  <script defer src="../materialmappe/sammlung.js"></script>
+  <script defer src="english.js?v=3"></script>
 </head>
 <body>
   <header><a class="brand" href="../">✳ Lerngarten</a><a href="../">Alle Lernbereiche</a></header>
@@ -83,8 +84,11 @@
       <div class="dialogue-actions">
         <button id="dialoguePdf" class="primary" type="button">A4-Paket herunterladen</button>
         <button id="dialoguePrint" type="button">Material drucken</button>
+        <button id="dialogueToFolder" type="button">Zur Mappe hinzufügen</button>
+        <a href="../materialmappe/">Mappe öffnen</a>
       </div>
       <p class="status">Eine Seite mit zwei Rollenkarten und ein Übungsblatt zum Mitnehmen.</p>
+      <p id="dialogueFolderStatus" class="status" role="status"></p>
       <p id="dialoguePrintStatus" class="status" role="status"></p>
     </section>
     <section id="worksheet" class="worksheet-layout" aria-label="A4-Arbeitsblatt" hidden>
@@ -93,6 +97,9 @@
         <label class="check"><input id="solutions" type="checkbox"> Lösungsblatt anhängen</label>
         <button id="pdf" class="primary" type="button">A4-PDF herunterladen</button>
         <button id="print" type="button">Drucken</button>
+        <button id="worksheetToFolder" type="button">Zur Mappe hinzufügen</button>
+        <p><a href="../materialmappe/">Mappe öffnen</a></p>
+        <p id="worksheetFolderStatus" class="status" role="status"></p>
         <p id="printStatus" class="status" role="status"></p>
       </aside>
       <div id="preview" aria-label="Druckvorschau"></div>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Stelle eine Vertretungsstunde für die Volksschule zusammen. Mit Ablauf, A4-Arbeitsblättern und Lösungen.">
+  <title>Vertretungsstunde · Lerngarten</title>
+  <link rel="stylesheet" href="../materialmappe/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="../alltag/generators.js"></script>
+  <script defer src="../mathegarten/a4-mathe.js"></script>
+  <script defer src="../mathegarten/mathe-mix.js"></script>
+  <script defer src="../materialmappe/sammlung.js"></script>
+  <script defer src="stunden.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="../">✳ Lerngarten</a><nav aria-label="Lerngarten"><a href="../materialmappe/">Materialmappe</a><a href="../">Alle Lernbereiche</a></nav></header>
+  <main>
+    <section class="intro">
+      <h1>Vertretungsstunde auf Knopfdruck</h1>
+      <p>Wähle Schulstufe, Fach und Dauer. Du bekommst einen fertigen Ablauf und Arbeitsblätter zum Ausdrucken.</p>
+    </section>
+    <div class="layout">
+      <section class="panel settings" aria-labelledby="settings-title">
+        <h2 id="settings-title">Stunde einstellen</h2>
+        <label for="grade">Schulstufe</label>
+        <select id="grade"><option value="1">1. Klasse</option><option value="2" selected>2. Klasse</option><option value="3">3. Klasse</option><option value="4">4. Klasse</option></select>
+        <label for="subject">Fach</label>
+        <select id="subject"><option value="math">Mathematik</option><option value="read">Deutsch · Lesen</option><option value="english">Englisch</option></select>
+        <label for="duration">Dauer</label>
+        <select id="duration"><option value="30">30 Minuten</option><option value="45" selected>45 Minuten</option><option value="50">50 Minuten</option><option value="60">60 Minuten</option></select>
+        <button class="primary" id="generate" type="button">Neuen Vorschlag erstellen</button>
+      </section>
+      <section class="collection" aria-labelledby="plan-title">
+        <h2 id="plan-title">Dein Stundenablauf</h2>
+        <p class="small" id="plan-details"></p>
+        <ol id="phases">
+          <li><h3 id="start-title">Einstieg</h3><p class="minutes" id="start-time"></p><label for="start" class="sr-only">Einstieg auswählen</label><select id="start"></select><p id="start-note"></p></li>
+          <li><h3 id="work-title">Arbeitsphase</h3><p class="minutes" id="work-time"></p><label for="work" class="sr-only">Arbeitsphase auswählen</label><select id="work"></select><p id="work-note"></p></li>
+          <li><h3 id="end-title">Abschluss</h3><p class="minutes" id="end-time"></p><label for="end" class="sr-only">Abschluss auswählen</label><select id="end"></select><p id="end-note"></p></li>
+          <li><h3>Reserve</h3><p class="minutes" id="reserve-time"></p><p id="reserve-note"></p></li>
+        </ol>
+        <p class="small" id="equipment"></p>
+        <div class="toolbar">
+          <button id="plan-pdf" class="primary" type="button">Ablauf als PDF</button>
+          <button id="work-pdf" type="button">Arbeitsblätter als PDF</button>
+          <button id="solutions-pdf" type="button">Lösungen als PDF</button>
+          <button id="collect" type="button">Zur Mappe hinzufügen</button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+        <details id="preview-box">
+          <summary id="preview-label">Vorschau der Arbeitsblätter</summary>
+          <div id="preview"></div>
+        </details>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

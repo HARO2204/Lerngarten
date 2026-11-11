@@ -1,0 +1,15 @@
+header nav{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px}
+.settings label{display:block;font-weight:700;font-size:14px;margin:15px 0 5px}
+select{width:100%;color:var(--ink);background:#fff;border:1px solid #aabb9d;border-radius:8px;padding:9px 11px;font:inherit}
+.settings button{margin-top:20px;width:100%}
+#phases{display:grid;gap:10px;padding:0;list-style:none}
+#phases li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:12px 15px;background:#f5f7ed;border:1px solid #dae3d0;border-radius:10px}
+#phases h3,#phases p{margin:0}
+#phases h3{font-size:16px}
+#phases select,#phases p:not(.minutes){grid-column:1/-1}
+.minutes{font-size:13px;font-weight:700;color:#506248}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+#preview-box{margin-top:18px}
+summary{font-weight:600;cursor:pointer}
+#preview svg{display:block;width:100%;max-width:595px;height:auto;margin:14px auto;border:1px solid var(--line)}
+@media(max-width:760px){.collection{grid-row:auto}}

@@ -1,0 +1,38 @@
+:root{--ink:#274638;--paper:#f8f7ef;--green:#3e6347;--line:#ced9c3;--muted:#687765}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 Arial,sans-serif}
+header,main{max-width:1160px;margin:auto;padding:24px 30px}
+header{display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid var(--line)}
+a{color:inherit}.brand{font:700 27px Georgia;text-decoration:none}header>a:last-child{font-size:13px}
+.intro{margin:12px 0 27px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:bold;color:#697b59}
+h1{font:500 clamp(38px,5vw,62px)/1.05 Georgia;margin:12px 0}
+h2{font:500 26px Georgia;margin:0 0 14px}.intro>p:last-child{color:var(--muted)}
+.controls{display:flex;align-items:end;gap:22px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:18px}
+.controls label{display:block;font-size:13px;font-weight:bold;margin-bottom:5px}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+button,select{font:600 14px Arial;color:var(--ink);border:1px solid #adbd9f;border-radius:9px;background:#fff;padding:11px 14px}
+button{cursor:pointer}button:hover{background:#e8efdb}button:disabled{opacity:.6;cursor:default}
+.primary,[aria-pressed=true]{background:var(--green);color:#fff}
+.primary:hover,[aria-pressed=true]:hover{background:#2e5136}
+:focus-visible{outline:3px solid #b89646;outline-offset:3px}
+.status{font-size:13px;color:var(--muted)}#audioStatus:empty{margin:0;height:18px}
+.word-cards,.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.word-card,.quiz,.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px}
+.word-card{text-align:center}.word-card h2{margin:4px 0 7px}.word-card p{font-size:14px;margin:0 0 13px;color:var(--muted)}
+.picture{display:block;aspect-ratio:1;width:min(100%,140px);margin:0 auto 10px;background-size:300% 200%;background-repeat:no-repeat;border-radius:11px}
+.picture.colour{width:min(100%,112px);aspect-ratio:4/3;margin:14px auto 21px;border:1px solid #8c9a82}
+.quiz{max-width:760px}.prompt{display:flex;gap:14px;align-items:center;margin:14px 0 18px}
+.prompt strong{font:500 32px Georgia}
+.choices button{min-width:0;padding:12px;background:#f7f8ef}.choices button:hover{background:#e9efdd}
+.choices button.correct{outline:3px solid #5b7d48}.choices .picture{margin-bottom:0}
+#feedback{min-height:25px}
+.worksheet-layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:22px;align-items:start}
+.panel{background:#edf2e4}.panel>button{margin:10px 4px 0 0}
+.check{display:flex;align-items:center;gap:7px;font-size:14px}
+.sheet{max-width:794px;width:100%;aspect-ratio:210/297;background:#fff;border:1px solid var(--line);margin:0 auto 20px;box-shadow:0 5px 20px #294a3910}
+.sheet svg{display:block;width:100%;height:100%}
+@media(max-width:760px){header,main{padding:20px 16px}.word-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.word-card{padding:14px}.worksheet-layout{grid-template-columns:1fr}.choices{gap:7px}}
+@page{size:A4 portrait;margin:0}
+@media print{header,.intro,.controls,#audioStatus,#cards,#quiz,.panel{display:none!important}body,main{margin:0;padding:0;max-width:none;background:white}body.printing #worksheet{display:block!important}.sheet{width:210mm;height:296.8mm;max-width:none;border:0;margin:0;box-shadow:none;break-after:page}.sheet:last-child{break-after:auto}}

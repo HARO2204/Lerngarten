@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Erste englische Wörter für die 2. Klasse. Mit Bildkarten, Zuordnungsspiel und A4-Arbeitsblättern.">
+  <title>Englischgarten · Lerngarten</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="../alltag/generators.js?v=2"></script>
+  <script defer src="audio.js"></script>
+  <script defer src="english.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="../">✳ Lerngarten</a><a href="../">Alle Lernbereiche</a></header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">Englischgarten · 2. Klasse</p>
+      <h1 lang="en">Hello, English!</h1>
+      <p>Schau dir die Bilder an, hör dir die Wörter an und sprich sie nach.</p>
+    </section>
+    <div class="controls">
+      <div>
+        <label for="theme">Thema</label>
+        <select id="theme">
+          <option value="colours">Colours · Farben</option>
+          <option value="animals">Animals · Tiere</option>
+          <option value="school">School things · Schulsachen</option>
+        </select>
+      </div>
+      <nav aria-label="Übungsform">
+        <button type="button" data-view="cards" aria-pressed="true">Bildkarten</button>
+        <button type="button" data-view="quiz" aria-pressed="false">Zuordnen</button>
+        <button type="button" data-view="worksheet" aria-pressed="false">Arbeitsblatt</button>
+      </nav>
+    </div>
+    <p id="audioStatus" class="status" role="status"></p>
+    <section id="cards" aria-label="Bildkarten">
+      <div id="wordCards" class="word-cards"></div>
+    </section>
+    <section id="quiz" aria-labelledby="quizHeading" hidden>
+      <div class="quiz">
+        <h2 id="quizHeading">Welches Bild passt?</h2>
+        <p id="progress" class="status"></p>
+        <div id="quizQuestion">
+          <div class="prompt"><strong id="quizWord" lang="en"></strong><button id="quizSpeak" type="button">Anhören</button></div>
+          <div id="choices" class="choices"></div>
+          <p id="feedback" role="status"></p>
+          <button id="next" class="primary" type="button" hidden>Weiter</button>
+        </div>
+        <button id="restart" type="button" hidden>Noch einmal üben</button>
+      </div>
+    </section>
+    <section id="worksheet" class="worksheet-layout" aria-label="A4-Arbeitsblatt" hidden>
+      <aside class="panel">
+        <h2>Druckvorlage</h2>
+        <label class="check"><input id="solutions" type="checkbox"> Lösungsblatt anhängen</label>
+        <button id="pdf" class="primary" type="button">A4-PDF herunterladen</button>
+        <button id="print" type="button">Drucken</button>
+        <p id="printStatus" class="status" role="status"></p>
+      </aside>
+      <div id="preview" aria-label="Druckvorschau"></div>
+    </section>
+  </main>
+</body>
+</html>

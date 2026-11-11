@@ -209,15 +209,25 @@
     return result;
   }
 
+  function renderPrintPreview(worksheets) {
+    get('preview').innerHTML = worksheets.map(svg => '<div class="sheet">' + svg + '</div>').join('');
+  }
+
   function showWorksheet() {
     const worksheets = pages();
-    get('preview').innerHTML = worksheets.map(svg => '<div class="sheet">' + svg + '</div>').join('');
+    renderPrintPreview(worksheets);
     printStatus.textContent = worksheets.length === 1 ? 'Eine A4-Seite.' : 'Zwei A4-Seiten mit Lösungsblatt.';
     if (theme.value === 'colours') printStatus.textContent += ' Für dieses Arbeitsblatt bitte in Farbe drucken.';
   }
 
   function showView(nextView) {
+    if (nextView !== view) {
+      player.pause();
+      EnglishDialogues.pause();
+      audioStatus.textContent = '';
+    }
     view = nextView;
+    get('vocabularyTheme').hidden = view === 'dialogues';
     for (const button of viewButtons) {
       const selected = button.dataset.view === view;
       button.setAttribute('aria-pressed', String(selected));
@@ -250,35 +260,44 @@
     showWorksheet();
     window.print();
   });
+  get('dialoguePrint').addEventListener('click', () => window.print());
   window.addEventListener('beforeprint', () => {
-    showWorksheet();
+    if (view === 'dialogues') renderPrintPreview(EnglishDialogues.pages());
+    else showWorksheet();
     document.body.classList.add('printing');
   });
   window.addEventListener('afterprint', () => document.body.classList.remove('printing'));
 
-  get('pdf').addEventListener('click', async () => {
+  async function downloadPdf(makePages, filename, status, button) {
     if (exporting) return;
     exporting = true;
-    get('pdf').disabled = true;
-    const topic = theme.value;
-    printStatus.textContent = 'A4-PDF wird erstellt …';
+    button.disabled = true;
+    status.textContent = 'A4-PDF wird erstellt …';
     try {
-      const bytes = await LerngartenFont.pdf(pages());
+      const bytes = await LerngartenFont.pdf(makePages());
       const url = URL.createObjectURL(new Blob([bytes], {type: 'application/pdf'}));
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'Englischgarten-' + topic + '-A4.pdf';
+      link.download = filename;
       document.body.append(link);
       link.click();
       link.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      printStatus.textContent = 'A4-PDF erstellt.';
+      status.textContent = 'A4-PDF erstellt.';
     } catch (error) {
-      printStatus.textContent = 'Das PDF konnte nicht erstellt werden. ' + error.message;
+      status.textContent = 'Das PDF konnte nicht erstellt werden. ' + error.message;
     } finally {
       exporting = false;
-      get('pdf').disabled = false;
+      button.disabled = false;
     }
+  }
+
+  get('pdf').addEventListener('click', () => {
+    downloadPdf(pages, 'Englischgarten-' + theme.value + '-A4.pdf', printStatus, get('pdf'));
+  });
+  get('dialoguePdf').addEventListener('click', () => {
+    const filename = 'Englischgarten-Dialog-' + get('dialogueTopic').value + '-A4.pdf';
+    downloadPdf(EnglishDialogues.pages, filename, get('dialoguePrintStatus'), get('dialoguePdf'));
   });
 
   showView('cards');

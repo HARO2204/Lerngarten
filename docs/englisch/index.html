@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Erste englische Wörter für die 2. Klasse. Mit Bildkarten, Zuordnungsspiel und A4-Arbeitsblättern.">
+  <meta name="description" content="Erste englische Wörter für die 2. Klasse. Mit Bildkarten, Zuordnungsspiel, Mini-Dialogen und A4-Arbeitsblättern.">
   <title>Englischgarten · Lerngarten</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
   <script defer src="../schriften/eigene-schrift.js?v=1"></script>
   <script defer src="../alltag/generators.js?v=2"></script>
   <script defer src="audio.js"></script>
-  <script defer src="english.js"></script>
+  <script defer src="dialogue-audio.js"></script>
+  <script defer src="dialogues.js"></script>
+  <script defer src="english.js?v=2"></script>
 </head>
 <body>
   <header><a class="brand" href="../">✳ Lerngarten</a><a href="../">Alle Lernbereiche</a></header>
@@ -20,7 +22,7 @@
       <p>Schau dir die Bilder an, hör dir die Wörter an und sprich sie nach.</p>
     </section>
     <div class="controls">
-      <div>
+      <div id="vocabularyTheme">
         <label for="theme">Thema</label>
         <select id="theme">
           <option value="colours">Colours · Farben</option>
@@ -31,6 +33,7 @@
       <nav aria-label="Übungsform">
         <button type="button" data-view="cards" aria-pressed="true">Bildkarten</button>
         <button type="button" data-view="quiz" aria-pressed="false">Zuordnen</button>
+        <button type="button" data-view="dialogues" aria-pressed="false">Mini-Dialoge</button>
         <button type="button" data-view="worksheet" aria-pressed="false">Arbeitsblatt</button>
       </nav>
     </div>
@@ -50,6 +53,39 @@
         </div>
         <button id="restart" type="button" hidden>Noch einmal üben</button>
       </div>
+    </section>
+    <section id="dialogues" class="dialogue" aria-labelledby="dialogueHeading" hidden>
+      <h2 id="dialogueHeading">Hören und nachspielen</h2>
+      <div class="dialogue-options">
+        <div>
+          <label for="dialogueTopic">Gespräch</label>
+          <select id="dialogueTopic">
+            <option value="hello">Sich begrüßen</option>
+            <option value="school">Nach einer Schulsache fragen</option>
+          </select>
+        </div>
+        <div id="objectChoice" hidden>
+          <label for="dialogueObject">Gegenstand</label>
+          <select id="dialogueObject">
+            <option value="pencil">Bleistift</option>
+            <option value="book">Buch</option>
+            <option value="ruler">Lineal</option>
+            <option value="schoolbag">Schultasche</option>
+            <option value="rubber">Radiergummi</option>
+          </select>
+        </div>
+      </div>
+      <audio id="dialoguePlayer" controls preload="none" aria-label="Gespräch mit zwei Stimmen anhören"></audio>
+      <p id="dialogueAudioStatus" class="status" role="status"></p>
+      <label class="check"><input id="dialogueHelp" type="checkbox"> Deutsche Hilfe anzeigen</label>
+      <ol id="dialogueLines" class="dialogue-lines" aria-label="Gespräch zum Mitlesen"></ol>
+      <p id="dialoguePractice"></p>
+      <div class="dialogue-actions">
+        <button id="dialoguePdf" class="primary" type="button">A4-Paket herunterladen</button>
+        <button id="dialoguePrint" type="button">Material drucken</button>
+      </div>
+      <p class="status">Eine Seite mit zwei Rollenkarten und ein Übungsblatt zum Mitnehmen.</p>
+      <p id="dialoguePrintStatus" class="status" role="status"></p>
     </section>
     <section id="worksheet" class="worksheet-layout" aria-label="A4-Arbeitsblatt" hidden>
       <aside class="panel">

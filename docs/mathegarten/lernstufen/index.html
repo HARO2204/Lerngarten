@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Zahlenstrahl und Stellenwerttafel in drei Lernstufen, mit A4-Arbeitsblättern und separaten Lösungen.">
+  <title>Drei Lernstufen · Mathegarten</title>
+  <link rel="stylesheet" href="../../materialmappe/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="../../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="../a4-mathe.js"></script>
+  <script defer src="../zahlenwerkstatt.js?v=1"></script>
+  <script defer src="../../materialmappe/sammlung.js"></script>
+  <script defer src="blaetter.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header>
+    <a class="brand" href="../">✳ Mathegarten</a>
+    <nav aria-label="Lerngarten">
+      <a href="../zahlenwerkstatt.html">Zahlenwerkstatt</a>
+      <a href="../../materialmappe/">Materialmappe</a>
+    </nav>
+  </header>
+  <main>
+    <section class="intro">
+      <h1>Ein Thema, drei Lernstufen</h1>
+      <p>Stell drei A4-Blätter zum selben Lernziel zusammen. Die Kinderblätter tragen dieselbe Überschrift.</p>
+    </section>
+    <div class="layout">
+      <section class="panel settings" aria-labelledby="settings-heading">
+        <h2 id="settings-heading">Paket einstellen</h2>
+        <label for="topic">Thema</label>
+        <select id="topic">
+          <option value="line">Zahlenstrahl</option>
+          <option value="place">Stellenwerttafel</option>
+        </select>
+        <label for="range">Zahlenraum</label>
+        <select id="range">
+          <option value="20">Bis 20</option>
+          <option value="50">Bis 50</option>
+          <option value="100" selected>Bis 100</option>
+          <option value="1000">Bis 1000</option>
+        </select>
+        <button id="generate" type="button">Neue Aufgaben</button>
+        <p class="small" id="discussion"></p>
+      </section>
+      <section class="collection" aria-labelledby="preview-heading">
+        <h2 id="preview-heading">Dein A4-Paket</h2>
+        <div class="toolbar">
+          <button id="worksheets" class="primary" type="button">3 Kinderblätter als PDF</button>
+          <button id="solutions" type="button">3 Lösungsblätter als PDF</button>
+          <button id="collect" type="button">Zur Mappe hinzufügen</button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+        <label for="preview-level">Vorschau</label>
+        <select id="preview-level">
+          <option value="0">Blatt 1 · Mit Hilfe</option>
+          <option value="1">Blatt 2 · Zum Üben</option>
+          <option value="2">Blatt 3 · Zum Knobeln</option>
+        </select>
+        <div id="preview"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

@@ -12,7 +12,16 @@ const KlasseZwei = (() => {
       intro: 'Spielt zu zweit Laden. Lest Preise, legt Beträge mit Spielgeld und gebt Wechselgeld zurück.',
       label: 'Preisliste',
       topics: ['Schulsachen · ganze Euro', 'Obststand · Euro und Cent'],
-      sheets: ['Passend bezahlen', 'Beträge verschieden legen', 'Wechselgeld berechnen']
+      sheets: ['Passend bezahlen', 'Beträge verschieden legen', 'Wechselgeld berechnen'],
+      extra: {label: 'Spielgeld als A4-PDF', filename: 'Spielgeld-A4.pdf', page: coins}
+    },
+    clock: {
+      title: UhrzeitWerkstatt.title,
+      intro: 'Stelle Uhrzeiten ein, zeichne Zeiger ein und rechne mit der Zeit.',
+      label: 'Uhrzeiten',
+      topics: ['Ganze und halbe Stunden', 'Ganze, halbe und Viertelstunden'],
+      sheets: UhrzeitWerkstatt.sheets,
+      extra: {label: 'Basteluhr als A4-PDF', filename: 'Basteluhr-A4.pdf', page: UhrzeitWerkstatt.craft}
     },
     sentences: {
       title: 'Satzwerkstatt',
@@ -220,10 +229,10 @@ const KlasseZwei = (() => {
     return {title, discussion: 'Gemeinsamer Abschluss: Lest zwei Sätze mit unterschiedlichen Anfängen vor. Was fällt euch an der Stelle des Verbs auf?', ...pairs(2, render)};
   }
 
-  const builders = {reading, shop, sentences};
+  const builders = {reading, shop, sentences, clock: UhrzeitWerkstatt.build};
   function build(area, index) {
     return builders[area](index);
   }
 
-  return {lessons, build, coins};
+  return {lessons, build};
 })();

@@ -17,7 +17,7 @@
   }
 
   function updateButtons() {
-    for (const id of ['worksheets', 'solutions', 'coins']) get(id).disabled = busy || !model;
+    for (const id of ['worksheets', 'solutions', 'extra']) get(id).disabled = busy || !model;
     get('collect').disabled = !model;
   }
 
@@ -40,7 +40,8 @@
     get('title').textContent = lesson.title;
     get('intro').textContent = lesson.intro;
     get('topic-label').textContent = lesson.label;
-    get('coins').hidden = area.value !== 'shop';
+    get('extra').hidden = !lesson.extra;
+    get('extra').textContent = lesson.extra?.label || '';
     showOptions(topic, lesson.topics);
     showOptions(sheet, lesson.sheets);
     const url = new URL(location.href);
@@ -55,8 +56,9 @@
     updateButtons();
     status.textContent = 'A4-PDF wird erstellt …';
     try {
-      const pages = kind === 'coins' ? [KlasseZwei.coins()] : model[kind];
-      const filename = kind === 'coins' ? 'Spielgeld-A4.pdf' : model.title + '-' + suffix + '-A4.pdf';
+      const extra = kind === 'extra' ? KlasseZwei.lessons[area.value].extra : null;
+      const pages = extra ? [extra.page()] : model[kind];
+      const filename = extra ? extra.filename : model.title + '-' + suffix + '-A4.pdf';
       const bytes = await LerngartenFont.pdf(pages);
       const url = URL.createObjectURL(new Blob([bytes], {type: 'application/pdf'}));
       const link = document.createElement('a');
@@ -80,7 +82,7 @@
   sheet.addEventListener('change', preview);
   get('worksheets').addEventListener('click', () => download('worksheets', 'Kinderblätter'));
   get('solutions').addEventListener('click', () => download('solutions', 'Lösungen'));
-  get('coins').addEventListener('click', () => download('coins'));
+  get('extra').addEventListener('click', () => download('extra'));
   MaterialMappe.bindAdd(get('collect'), status, () => ({
     ...model,
     area: KlasseZwei.lessons[area.value].title + ' · 2. Klasse'

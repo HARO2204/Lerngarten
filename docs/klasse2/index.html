@@ -10,8 +10,9 @@
 <script defer src="../mathegarten/a4-mathe.js?v=2"></script>
 <script defer src="../lesegarten/geschichten.js?v=1"></script>
 <script defer src="../materialmappe/sammlung.js"></script>
-<script defer src="blaetter.js?v=2"></script>
-<script defer src="app.js"></script>
+<script defer src="uhrzeit.js"></script>
+<script defer src="blaetter.js?v=3"></script>
+<script defer src="app.js?v=2"></script>
 </head>
 <body>
 <header><a class="brand" href="../">✳ Lerngarten</a><a href="../materialmappe/">Materialmappe</a></header>
@@ -24,12 +25,13 @@
     <select id="area">
       <option value="reading">Lesegarten · Drei Lesestufen</option>
       <option value="shop">Mathegarten · Klassenladen</option>
+      <option value="clock">Mathegarten · Uhrzeit-Werkstatt</option>
       <option value="sentences">Schreibgarten · Satzwerkstatt</option>
     </select>
     <label for="topic" id="topic-label">Thema</label>
     <select id="topic"></select>
     <p id="discussion" class="small"></p>
-    <button id="coins" type="button" hidden>Spielgeld als A4-PDF</button>
+    <button id="extra" type="button" hidden></button>
   </aside>
   <section class="collection" aria-labelledby="packet-title">
     <h2 id="packet-title">Dein A4-Paket</h2>

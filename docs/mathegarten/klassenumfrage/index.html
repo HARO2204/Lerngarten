@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unsere Klasse in Zahlen · Mathegarten</title>
+  <link rel="stylesheet" href="../../materialmappe/style.css">
+  <link rel="stylesheet" href="../../klasse2/style.css">
+  <style>.settings input{width:100%;font:inherit;color:inherit;border:1px solid #aabb9d;border-radius:8px;padding:8px} fieldset{margin:14px 0;border:1px solid var(--line);border-radius:8px} legend{font-weight:600;font-size:14px} fieldset label{margin-top:8px}</style>
+  <script defer src="../../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="../a4-mathe.js?v=2"></script>
+  <script defer src="umfrage.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="../">✳ Mathegarten</a><a href="../../forschergarten/pflanzen/">Pflanzen-Führerschein</a></header>
+  <main>
+    <section class="intro">
+      <h1>Unsere Klasse in Zahlen</h1>
+      <p>Stimmen sammeln, Striche zählen und ein Säulendiagramm zeichnen. Für die 2. Klasse.</p>
+    </section>
+    <div class="layout">
+      <aside class="panel settings">
+        <h2>Umfrage einstellen</h2>
+        <label for="mode">Daten</label>
+        <select id="mode"><option value="own">Eigene Klassenumfrage</option><option value="example">Beispieldaten</option></select>
+        <div id="own">
+          <label for="question">Umfragefrage</label>
+          <input id="question" maxlength="88" value="Welches Obst magst du am liebsten?">
+          <fieldset>
+            <legend>Vier Antwortmöglichkeiten</legend>
+            <label for="choice1">Antwort 1</label><input id="choice1" maxlength="16" value="Apfel">
+            <label for="choice2">Antwort 2</label><input id="choice2" maxlength="16" value="Birne">
+            <label for="choice3">Antwort 3</label><input id="choice3" maxlength="16" value="Banane">
+            <label for="choice4">Antwort 4</label><input id="choice4" maxlength="16" value="Trauben">
+          </fieldset>
+          <p class="small">Jedes Kind gibt eine Stimme ab. Die Skala reicht bis 30 Stimmen pro Antwort.</p>
+        </div>
+        <div id="example" hidden>
+          <label for="example-topic">Beispielthema</label>
+          <select id="example-topic"><option value="0">Lieblingsobst</option><option value="1">Lieblingstier</option></select>
+          <p class="small">Die Strichliste ist schon ausgefüllt. Zum Prüfen gibt es Lösungen.</p>
+        </div>
+      </aside>
+      <section class="collection" aria-labelledby="preview-heading">
+        <h2 id="preview-heading">Dein A4-Paket</h2>
+        <div class="toolbar">
+          <button id="worksheets" type="button" class="primary">3 Kinderblätter als PDF</button>
+          <button id="solutions" type="button" hidden>Lösungen als PDF</button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+        <label for="sheet">Vorschau</label>
+        <select id="sheet">
+          <option value="0">Blatt 1 · Stimmen zählen</option>
+          <option value="1">Blatt 2 · Säulen zeichnen</option>
+          <option value="2">Blatt 3 · Eigene Fragen stellen</option>
+        </select>
+        <div id="preview"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

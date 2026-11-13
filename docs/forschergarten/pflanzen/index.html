@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pflanzen-Führerschein · Lerngarten</title>
+  <link rel="stylesheet" href="../../materialmappe/style.css">
+  <link rel="stylesheet" href="../../klasse2/style.css">
+  <script defer src="../../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="../../mathegarten/a4-mathe.js?v=2"></script>
+  <script defer src="pflanzen.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="../../">✳ Lerngarten</a><a href="../">Sachunterricht</a></header>
+  <main>
+    <section class="intro">
+      <h1>Pflanzen-Führerschein</h1>
+      <p>Ziehe eine Bohne, beobachte, wie sie keimt, und vergleiche deine Zeichnungen. Für die 2. Klasse.</p>
+    </section>
+    <div class="layout">
+      <aside class="panel">
+        <h2>Das braucht ihr</h2>
+        <ul><li>Getrocknete, unbehandelte Bohnen</li><li>Durchsichtige Becher, Watte und Wasser</li><li>Bleistifte und Lineale</li></ul>
+        <p>Das Tagebuch hat Platz für den Pflanztag und drei frei gewählte Beobachtungstage.</p>
+      </aside>
+      <section class="collection" aria-labelledby="packet">
+        <h2 id="packet">A4-Material zum Ausdrucken</h2>
+        <div class="toolbar">
+          <button type="button" class="primary" data-download="diary">Forschertagebuch</button>
+          <button type="button" data-download="cards">Schritt-Karten</button>
+          <button type="button" data-download="teacher">Ablauf für die Lehrkraft</button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+        <label for="sheet">Vorschau</label>
+        <select id="sheet">
+          <option value="cards:0">Schritt-Karten</option>
+          <option value="diary:0">Tagebuch · Pflanztag und erste Beobachtung</option>
+          <option value="diary:1">Tagebuch · Zweite und dritte Beobachtung</option>
+          <option value="diary:2">Tagebuch · Vergleich und Führerschein</option>
+          <option value="teacher:0">Ablauf für die Lehrkraft</option>
+        </select>
+        <div id="preview"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

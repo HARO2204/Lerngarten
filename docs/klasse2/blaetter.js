@@ -73,7 +73,7 @@ const KlasseZwei = (() => {
 
     function render(level, solution) {
       const label = solution ? lessons.reading.sheets[level] : 'Blatt ' + (level + 1);
-      const p = MathA4.page(title, 'Lesegarten · 2. Klasse · ' + label, {solution});
+      const p = MathA4.page(title, '2. Klasse · ' + label, {solution, kicker: 'LESEGARTEN · A4'});
       if (solution) {
         if (level < 2) {
           answers.forEach((answer, i) => p.para(40, 167 + i * 49, (i + 1) + '. ' + answer, 515, 14));
@@ -156,7 +156,7 @@ const KlasseZwei = (() => {
   }
 
   function coins() {
-    const p = MathA4.page('Spielgeld für den Klassenladen', 'Lerngarten · Ausschneidebogen');
+    const p = MathA4.page('Spielgeld für den Klassenladen', 'Lerngarten · Ausschneidebogen', {names: false});
     p.text(40, 153, 'Schneide die Münzen und Scheine aus. Alle Beträge sind Spielgeld.', 12);
     ['10 ct', '20 ct', '50 ct', '1 €', '2 €'].forEach((value, row) => {
       for (let col = 0; col < 6; col++) {
@@ -191,7 +191,7 @@ const KlasseZwei = (() => {
     const data = sentenceSets[index];
     const title = 'Satzwerkstatt · ' + lessons.sentences.topics[index];
     function render(sheet, solution) {
-      const p = MathA4.page(title, 'Schreibgarten · 2. Klasse · ' + lessons.sentences.sheets[sheet], {solution});
+      const p = MathA4.page(title, '2. Klasse · ' + lessons.sentences.sheets[sheet], {solution, kicker: 'SCHREIBGARTEN · A4'});
       if (sheet === 0) {
         p.para(40, 165, 'Schneide die Karten aus oder lege sie mit kleinen Zetteln nach.', 515, 13);
         data.cards.forEach((word, i) => box(p, 40 + i * 130, 194, word, 122));

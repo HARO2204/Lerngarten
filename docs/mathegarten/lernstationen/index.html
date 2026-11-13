@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lernstationen-Baukasten · Mathegarten</title>
+  <link rel="stylesheet" href="../../materialmappe/style.css">
+  <link rel="stylesheet" href="../../klasse2/style.css">
+  <style>
+    fieldset{padding:0;margin:0;border:0}
+    legend{font:500 23px Georgia}
+    fieldset label{display:flex;align-items:center;gap:8px}
+    input[type=checkbox]{width:18px;height:18px;accent-color:var(--green)}
+    #choice{margin-top:20px}
+    #preview-heading{margin-bottom:5px}
+  </style>
+  <script defer src="../../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="../a4-mathe.js?v=2"></script>
+  <script defer src="../../klasse2/uhrzeit.js"></script>
+  <script defer src="../../materialmappe/sammlung.js"></script>
+  <script defer src="stationen.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="../">✳ Mathegarten</a><a href="../../materialmappe/">Materialmappe</a></header>
+  <main>
+    <section class="intro">
+      <h1>Lernstationen-Baukasten</h1>
+      <p>Stell eine Stationsstunde zum Thema „Messen im Schulalltag“ für die 2. Klasse zusammen.</p>
+    </section>
+    <div class="layout">
+      <aside class="panel">
+        <fieldset>
+          <legend>Stationen auswählen</legend>
+          <label><input name="station" type="checkbox" value="ruler" checked> Mit dem Lineal messen</label>
+          <label><input name="station" type="checkbox" value="clock" checked> Uhrzeit an der Basteluhr</label>
+          <label><input name="station" type="checkbox" value="survey"> Strichliste und Säulendiagramm</label>
+        </fieldset>
+        <div id="choice" hidden>
+          <label for="optional">Wahlstation</label>
+          <select id="optional">
+            <option value="">Alle drei sind Pflicht</option>
+            <option value="ruler">Mit dem Lineal messen</option>
+            <option value="clock">Uhrzeit an der Basteluhr</option>
+            <option value="survey">Strichliste und Säulendiagramm</option>
+          </select>
+        </div>
+        <p id="preparation" class="small"></p>
+      </aside>
+      <section class="collection" aria-labelledby="preview-heading">
+        <h2 id="preview-heading">Messen im Schulalltag</h2>
+        <p id="count" class="small"></p>
+        <div class="toolbar">
+          <button id="worksheets" type="button" class="primary">A4-Paket herunterladen</button>
+          <button id="solutions" type="button">Lösungsblatt herunterladen</button>
+          <button id="collect" type="button">Zur Mappe hinzufügen</button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+        <label for="sheet">Vorschau</label>
+        <select id="sheet"></select>
+        <div id="preview"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,8 @@
+header nav{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px}
+label{display:block;margin:16px 0 4px;font-weight:700;font-size:14px}
+select{width:100%;max-width:300px;padding:9px 10px;border:1px solid #aabb9d;border-radius:8px;background:#fff;color:var(--ink);font:inherit}
+.settings button{display:block;margin-top:17px}
+#discussion{margin:20px 0 0}
+#preview{margin-top:16px}
+#preview svg{display:block;width:100%;max-width:595px;height:auto;margin:auto;border:1px solid var(--line)}
+@media(max-width:760px){.collection{grid-row:auto}}

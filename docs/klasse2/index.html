@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Übungswerkstätten · 2. Klasse · Lerngarten</title>
+<link rel="stylesheet" href="../materialmappe/style.css">
+<link rel="stylesheet" href="style.css">
+<script defer src="../schriften/eigene-schrift.js?v=1"></script>
+<script defer src="../mathegarten/a4-mathe.js"></script>
+<script defer src="../lesegarten/geschichten.js?v=1"></script>
+<script defer src="../materialmappe/sammlung.js"></script>
+<script defer src="blaetter.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+<header><a class="brand" href="../">✳ Lerngarten</a><a href="../materialmappe/">Materialmappe</a></header>
+<main>
+<section class="intro"><h1 id="title">Übungswerkstätten für die 2. Klasse</h1><p id="intro"></p></section>
+<div class="layout">
+  <aside class="panel settings">
+    <h2>Paket zusammenstellen</h2>
+    <label for="area">Werkstatt</label>
+    <select id="area">
+      <option value="reading">Lesegarten · Drei Lesestufen</option>
+      <option value="shop">Mathegarten · Klassenladen</option>
+      <option value="sentences">Schreibgarten · Satzwerkstatt</option>
+    </select>
+    <label for="topic" id="topic-label">Thema</label>
+    <select id="topic"></select>
+    <p id="discussion" class="small"></p>
+    <button id="coins" type="button" hidden>Spielgeld als A4-PDF</button>
+  </aside>
+  <section class="collection" aria-labelledby="packet-title">
+    <h2 id="packet-title">Dein A4-Paket</h2>
+    <div class="toolbar">
+      <button class="primary" id="worksheets" type="button">Kinderblätter als PDF</button>
+      <button id="solutions" type="button">Lösungen als PDF</button>
+      <button id="collect" type="button">Zur Mappe hinzufügen</button>
+    </div>
+    <p id="status" class="status" role="status"></p>
+    <label for="sheet">Vorschau</label>
+    <select id="sheet"></select>
+    <div id="preview"></div>
+  </section>
+</div>
+</main>
+</body>
+</html>

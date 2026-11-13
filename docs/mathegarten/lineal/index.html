@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forschen mit dem Lineal · Mathegarten</title>
+  <link rel="stylesheet" href="../../materialmappe/style.css">
+  <link rel="stylesheet" href="../../klasse2/style.css">
+  <script defer src="../../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="../a4-mathe.js?v=2"></script>
+  <script defer src="lineal.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="../">✳ Mathegarten</a><a href="../../forschergarten/pflanzen/">Pflanzen-Führerschein</a></header>
+  <main>
+    <section class="intro">
+      <h1>Forschen mit dem Lineal</h1>
+      <p>Schätzen, in Zentimetern messen und Längen vergleichen. Für die 2. Klasse.</p>
+    </section>
+    <div class="layout">
+      <aside class="panel">
+        <h2>Das braucht ihr</h2>
+        <p>Lineal, Bleistift, Radiergummi, Heft und Klebestift.</p>
+        <p>Drucke die PDFs in <strong>tatsächlicher Größe (100 %)</strong>. Prüfe auf Blatt 1, ob der Kontrollstrich genau 5 cm lang ist.</p>
+      </aside>
+      <section class="collection" aria-labelledby="packet">
+        <h2 id="packet">A4-Material zum Ausdrucken</h2>
+        <div class="toolbar">
+          <button type="button" class="primary" data-pack="children">3 Kinderblätter</button>
+          <button type="button" data-pack="solutions">Lösungsblatt</button>
+          <button type="button" data-pack="cards">Messkarten</button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+        <label for="sheet">Vorschau</label>
+        <select id="sheet">
+          <option value="children:0">Blatt 1 · Mit Hilfe</option>
+          <option value="children:1">Blatt 2 · Zum Üben</option>
+          <option value="children:2">Blatt 3 · Zum Knobeln</option>
+          <option value="solutions:0">Lösungsblatt</option>
+          <option value="cards:0">Messkarten für die Partnerarbeit</option>
+        </select>
+        <div id="preview"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

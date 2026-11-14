@@ -23,9 +23,16 @@
 
   function render() {
     status.textContent = '';
+    get('follow-up').hidden = true;
     try {
       model = KlasseZwei.build(area.value, Number(topic.value));
       get('discussion').textContent = model.discussion;
+      if (model.followUp) {
+        const resource = get('resource');
+        resource.href = model.followUp.link;
+        resource.textContent = model.followUp.resource;
+        get('follow-up').hidden = false;
+      }
     } catch (error) {
       model = null;
       get('discussion').textContent = '';

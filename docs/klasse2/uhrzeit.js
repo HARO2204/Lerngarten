@@ -133,5 +133,5 @@ const UhrzeitWerkstatt = (() => {
     };
   }
 
-  return {title, sheets, build, craft};
+  return {title, sheets, build, craft, face};
 })();

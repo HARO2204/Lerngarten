@@ -1,5 +1,12 @@
 const KlasseZwei = (() => {
   const lessons = {
+    check: {
+      title: '5-Minuten-Lernchecks',
+      intro: 'Drei kurze Aufgaben zum Abschluss einer Stunde in der 2. Klasse.',
+      label: 'Thema',
+      topics: Lernchecks.topics,
+      sheets: ['Vier Karten auf einer A4-Seite']
+    },
     reading: {
       title: 'Eine Geschichte, drei Lesestufen',
       intro: 'Alle lesen dieselbe Geschichte. Die Aufgaben führen vom Ankreuzen zum Begründen mit Textstellen.',
@@ -229,7 +236,7 @@ const KlasseZwei = (() => {
     return {title, discussion: 'Gemeinsamer Abschluss: Lest zwei Sätze mit unterschiedlichen Anfängen vor. Was fällt euch an der Stelle des Verbs auf?', ...pairs(2, render)};
   }
 
-  const builders = {reading, shop, sentences, clock: UhrzeitWerkstatt.build};
+  const builders = {reading, shop, sentences, clock: UhrzeitWerkstatt.build, check: Lernchecks.build};
   function build(area, index) {
     return builders[area](index);
   }

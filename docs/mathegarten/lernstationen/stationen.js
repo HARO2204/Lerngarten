@@ -1,5 +1,4 @@
 const Lernstationen = (() => {
-  const title = 'Messen im Schulalltag';
   const ink = '#203d36';
   const stations = {
     ruler: {title: 'Mit dem Lineal messen', materials: 'Lineal und zwei verschieden lange Bleistifte', draw: ruler},
@@ -9,7 +8,10 @@ const Lernstationen = (() => {
   const votes = [
     ['Apfel', 7], ['Birne', 3], ['Banane', 5], ['Trauben', 4]
   ];
-  const subtitle = '2. Klasse · Messen im Schulalltag';
+  const topics = {
+    math: {title: 'Messen im Schulalltag', stations},
+    literacy: LeseStationen
+  };
 
   function lines(p, y, count) {
     for (let i = 0; i < count; i++) p.line(40, y + i * 37, 555, y + i * 37);
@@ -83,16 +85,19 @@ const Lernstationen = (() => {
     lines(p, 754, 1);
   }
 
-  function build(selected, optional) {
+  function build(selected, optional, topic = 'math') {
+    const {title, stations} = topics[topic];
+    const subtitle = '2. Klasse · ' + title;
+    const pageOptions = topic === 'literacy' ? {kicker: 'LESEGARTEN · A4'} : {};
     if (selected.length < 2) throw Error('Wähle mindestens zwei Stationen aus.');
     const items = selected.map((id, index) => ({id, number: index + 1, optional: id === optional, ...stations[id]}));
     const worksheets = items.map(item => {
-      const p = MathA4.page(item.title, subtitle + ' · Station ' + item.number + (item.optional ? ' · Wahlstation' : ''));
+      const p = MathA4.page(item.title, subtitle + ' · Station ' + item.number + (item.optional ? ' · Wahlstation' : ''), pageOptions);
       p.para(40, 160, 'Material: ' + item.materials, 515, 12);
       item.draw(p);
       return p.finish();
     });
-    const route = MathA4.page('Mein Laufzettel', subtitle);
+    const route = MathA4.page('Mein Laufzettel', subtitle, pageOptions);
     route.para(40, 168, 'Kreuze jede Station an, die du erledigt hast. Bearbeite zuerst die Pflichtstationen.', 515, 14);
     items.forEach((item, index) => {
       const y = 240 + index * 106;
@@ -116,14 +121,14 @@ const Lernstationen = (() => {
       survey: votes.map(([name, count]) => name + ': ' + count).join(' · ') +
         '. Die Säulen haben dieselben Höhen wie die Stimmenzahlen. Apfel hat ' + (votes[0][1] - votes[1][1]) + ' Stimmen mehr als Birne.'
     };
-    const key = MathA4.page(title, subtitle, {solution: true});
+    const key = MathA4.page(title, subtitle, {...pageOptions, solution: true});
     items.forEach((item, index) => {
       const y = 155 + index * 180;
       key.text(40, y, 'Station ' + item.number + ' · ' + item.title, 15, true);
-      key.para(40, y + 33, answers[item.id], 515, 14);
+      key.para(40, y + 33, item.answer || answers[item.id], 515, 14);
     });
     return {title, labels, worksheets, solutions: [key.finish()]};
   }
 
-  return {build, stations};
+  return {build, topics};
 })();

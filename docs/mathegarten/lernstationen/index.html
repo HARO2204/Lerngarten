@@ -18,32 +18,29 @@
   <script defer src="../a4-mathe.js?v=2"></script>
   <script defer src="../../klasse2/uhrzeit.js"></script>
   <script defer src="../../materialmappe/sammlung.js"></script>
-  <script defer src="stationen.js"></script>
-  <script defer src="app.js"></script>
+  <script defer src="../../lesegarten/geschichten.js?v=1"></script>
+  <script defer src="lesen.js"></script>
+  <script defer src="stationen.js?v=2"></script>
+  <script defer src="app.js?v=2"></script>
 </head>
 <body>
   <header><a class="brand" href="../">✳ Mathegarten</a><a href="../../materialmappe/">Materialmappe</a></header>
   <main>
     <section class="intro">
       <h1>Lernstationen-Baukasten</h1>
-      <p>Stell eine Stationsstunde zum Thema „Messen im Schulalltag“ für die 2. Klasse zusammen.</p>
+      <p>Wähle ein Thema und stell eine Stationsstunde für die 2. Klasse zusammen.</p>
     </section>
     <div class="layout">
       <aside class="panel">
-        <fieldset>
-          <legend>Stationen auswählen</legend>
-          <label><input name="station" type="checkbox" value="ruler" checked> Mit dem Lineal messen</label>
-          <label><input name="station" type="checkbox" value="clock" checked> Uhrzeit an der Basteluhr</label>
-          <label><input name="station" type="checkbox" value="survey"> Strichliste und Säulendiagramm</label>
-        </fieldset>
+        <label for="topic">Thema</label>
+        <select id="topic">
+          <option value="math">Messen im Schulalltag</option>
+          <option value="literacy">Lesen und Schreiben · Spuren im Schnee</option>
+        </select>
+        <fieldset id="stations" style="margin-top:20px"><legend>Stationen auswählen</legend><div id="station-options"></div></fieldset>
         <div id="choice" hidden>
           <label for="optional">Wahlstation</label>
-          <select id="optional">
-            <option value="">Alle drei sind Pflicht</option>
-            <option value="ruler">Mit dem Lineal messen</option>
-            <option value="clock">Uhrzeit an der Basteluhr</option>
-            <option value="survey">Strichliste und Säulendiagramm</option>
-          </select>
+          <select id="optional"></select>
         </div>
         <p id="preparation" class="small"></p>
       </aside>

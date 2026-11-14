@@ -33,6 +33,8 @@
     get('package-name').disabled = busy || !loaded;
     get('save').textContent = name ? 'Paket kopieren' : 'Paket speichern';
     get('save').disabled = busy || !loaded || (!name && !items.length);
+    get('export-package').disabled = busy || !loaded || !name || !items.length;
+    get('import-package').disabled = busy || !loaded;
     const rows = items.map((item, index) => {
       const row = document.createElement('li');
       row.dataset.id = item.id;
@@ -115,14 +117,7 @@
         return;
       }
       const bytes = await LerngartenFont.pdf(pages);
-      const url = URL.createObjectURL(new Blob([bytes], {type: 'application/pdf'}));
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = filename;
-      document.body.append(link);
-      link.click();
-      link.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      saveFile(new Blob([bytes], {type: 'application/pdf'}), filename);
       status.textContent = 'A4-PDF mit ' + pageLabel(pages.length) + ' erstellt.';
     } catch (error) {
       status.textContent = 'Das PDF konnte nicht erstellt werden. ' + error.message;
@@ -132,6 +127,53 @@
     }
   }
 
+  function saveFile(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function exportPackage() {
+    if (busy) return;
+    busy = true;
+    render();
+    status.textContent = 'Paketdatei wird erstellt …';
+    try {
+      const latest = await MaterialMappe.read();
+      if (latest.activeId !== view.activeId) throw Error('Die aktive Zusammenstellung hat sich geändert.');
+      view = latest;
+      const name = view.packages.find(item => item.id === view.activeId)?.name;
+      if (!name || !view.items.length) throw Error('Öffne zuerst ein Paket mit Arbeitsblättern.');
+      const blob = await Paketdatei.exportFile(name, view.items);
+      saveFile(blob, name.replace(/[<>:"/\\|?*]/g, '-') + '.lerngarten.json');
+      status.textContent = 'Paketdatei heruntergeladen.';
+    } catch (error) {
+      status.textContent = 'Export fehlgeschlagen. ' + error.message;
+    } finally {
+      busy = false;
+      render();
+    }
+  }
+
+  get('export-package').addEventListener('click', exportPackage);
+  const fileInput = get('package-file');
+  get('import-package').addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    fileInput.value = '';
+    if (!file) return;
+    update(async () => {
+      const packet = await Paketdatei.readFile(file);
+      const imported = await MaterialMappe.importPackage(packet);
+      get('package-name').value = '';
+      return imported;
+    }, '', 'Paket importiert und geöffnet.');
+  });
   get('package').addEventListener('change', event => {
     const id = event.target.value;
     get('package-name').value = '';

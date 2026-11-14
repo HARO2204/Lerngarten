@@ -103,6 +103,24 @@ const MaterialMappe = (() => {
     });
   }
 
+  function importPackage({name, items}) {
+    return transact(current => {
+      const {state} = current;
+      const occupied = candidate => state.saved.some(item =>
+        item.name.localeCompare(candidate, 'de', {sensitivity: 'accent'}) === 0);
+      let uniqueName = name;
+      for (let i = 2; occupied(uniqueName); i++) {
+        const suffix = ' (' + i + ')';
+        uniqueName = name.slice(0, 80 - suffix.length).trimEnd() + suffix;
+      }
+      archive(current);
+      const id = crypto.randomUUID();
+      state.saved.push({id, name: uniqueName, items: []});
+      current.items = items;
+      state.activeId = id;
+    });
+  }
+
   function keepImagePaths(source) {
     if (!source.includes('<image')) return source;
     const document = new DOMParser().parseFromString(source, 'image/svg+xml');
@@ -161,5 +179,5 @@ const MaterialMappe = (() => {
     });
   }
 
-  return {read: () => transact(), move, remove, bindAdd, openPackage, savePackage};
+  return {read: () => transact(), move, remove, bindAdd, openPackage, savePackage, importPackage};
 })();

@@ -7,8 +7,9 @@
   <title>Materialmappe · Lerngarten</title>
   <link rel="stylesheet" href="style.css?v=2">
   <script defer src="../schriften/eigene-schrift.js?v=1"></script>
-  <script defer src="sammlung.js?v=2"></script>
-  <script defer src="mappe.js?v=2"></script>
+  <script defer src="sammlung.js?v=3"></script>
+  <script defer src="paketdatei.js"></script>
+  <script defer src="mappe.js?v=3"></script>
 </head>
 <body>
   <header><a class="brand" href="../">✳ Lerngarten</a><a href="../">Alle Lernbereiche</a></header>
@@ -38,6 +39,11 @@
             <input id="package-name" maxlength="80" required placeholder="z. B. Wetterwoche">
             <button id="save" type="submit" disabled>Paket speichern</button>
           </form>
+          <div class="toolbar" style="margin-top:12px">
+            <button id="export-package" type="button" disabled>Paket exportieren</button>
+            <button id="import-package" type="button" disabled>Paket importieren</button>
+            <input type="file" id="package-file" accept=".json,application/json" aria-label="Unterrichtspaket-Datei" hidden>
+          </div>
           <p id="package-help" class="small">Änderungen werden automatisch gespeichert. Neue Blätter landen in der geöffneten Zusammenstellung.</p>
         </div>
         <h2 id="active-title">Lose Blätter</h2>

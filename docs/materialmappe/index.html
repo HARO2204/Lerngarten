@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Sammle deine Unterrichtsblätter aus dem Lerngarten und lade sie gemeinsam als A4-Paket herunter.">
   <title>Materialmappe · Lerngarten</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
   <script defer src="../schriften/eigene-schrift.js?v=1"></script>
-  <script defer src="sammlung.js"></script>
-  <script defer src="mappe.js"></script>
+  <script defer src="sammlung.js?v=2"></script>
+  <script defer src="mappe.js?v=2"></script>
 </head>
 <body>
   <header><a class="brand" href="../">✳ Lerngarten</a><a href="../">Alle Lernbereiche</a></header>
@@ -26,10 +26,21 @@
           <li><a href="../mathegarten/">Mathegarten öffnen</a></li>
           <li><a href="../englisch/">Englischgarten öffnen</a></li>
         </ul>
-        <p class="small">Die Mappe wird in diesem Browser gespeichert.</p>
+        <p class="small">Deine Pakete und losen Blätter werden in diesem Browser gespeichert.</p>
       </aside>
       <section class="collection" aria-labelledby="collectionTitle">
-        <h2 id="collectionTitle">Deine Materialien</h2>
+        <h2 id="collectionTitle">Unterrichtspakete</h2>
+        <div class="package-tools">
+          <label for="package">Zusammenstellung öffnen</label>
+          <select id="package" disabled><option value="">Lose Blätter</option></select>
+          <form id="save-package" class="toolbar">
+            <label for="package-name" id="package-name-label">Name des neuen Pakets</label>
+            <input id="package-name" maxlength="80" required placeholder="z. B. Wetterwoche">
+            <button id="save" type="submit" disabled>Paket speichern</button>
+          </form>
+          <p id="package-help" class="small">Änderungen werden automatisch gespeichert. Neue Blätter landen in der geöffneten Zusammenstellung.</p>
+        </div>
+        <h2 id="active-title">Lose Blätter</h2>
         <p id="count" class="small" hidden></p>
         <div class="toolbar">
           <button id="worksheets" class="primary" type="button" disabled>A4-Paket herunterladen</button>

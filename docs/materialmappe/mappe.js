@@ -2,7 +2,8 @@
   'use strict';
   const get = id => document.getElementById(id);
   const status = get('status');
-  let items = [];
+  let view = {items: [], activeId: '', packages: []};
+  let loaded = false;
   let busy = false;
   let refreshNumber = 0;
 
@@ -21,6 +22,17 @@
   }
 
   function render(focusId) {
+    const {items, activeId, packages} = view;
+    const name = packages.find(item => item.id === activeId)?.name;
+    const packageSelect = get('package');
+    packageSelect.replaceChildren(new Option('Lose Blätter', ''), ...packages.map(item => new Option(item.name, item.id)));
+    packageSelect.value = activeId;
+    packageSelect.disabled = busy || !loaded;
+    get('active-title').textContent = name || 'Lose Blätter';
+    get('package-name-label').textContent = name ? 'Name der Kopie' : 'Name des neuen Pakets';
+    get('package-name').disabled = busy || !loaded;
+    get('save').textContent = name ? 'Paket kopieren' : 'Paket speichern';
+    get('save').disabled = busy || !loaded || (!name && !items.length);
     const rows = items.map((item, index) => {
       const row = document.createElement('li');
       row.dataset.id = item.id;
@@ -62,23 +74,24 @@
   async function refresh() {
     const request = ++refreshNumber;
     try {
-      const stored = await MaterialMappe.list();
+      const stored = await MaterialMappe.read();
       if (busy || request !== refreshNumber) return;
-      items = stored;
+      view = stored;
+      loaded = true;
       render();
     } catch (error) {
       status.textContent = 'Die Materialmappe konnte nicht geladen werden. ' + error.message;
     }
   }
 
-  async function update(change, focusId) {
+  async function update(change, focusId, message = '') {
     if (busy) return;
     busy = true;
     refreshNumber++;
     render();
     try {
-      items = await change();
-      status.textContent = '';
+      view = await change();
+      status.textContent = message;
     } catch (error) {
       status.textContent = 'Die Änderung konnte nicht gespeichert werden. ' + error.message;
     } finally {
@@ -87,14 +100,16 @@
     }
   }
 
-  async function download(kind, filename) {
+  async function download(kind) {
     if (busy) return;
     busy = true;
     render();
     status.textContent = 'A4-PDF wird erstellt …';
     try {
-      items = await MaterialMappe.list();
-      const pages = items.flatMap(item => item[kind]);
+      view = await MaterialMappe.read();
+      const name = view.packages.find(item => item.id === view.activeId)?.name || 'Lerngarten-Materialmappe';
+      const filename = name.replace(/[<>:"/\\|?*]/g, '-') + (kind === 'solutions' ? '-Loesungen-A4.pdf' : '-A4.pdf');
+      const pages = view.items.flatMap(item => item[kind]);
       if (!pages.length) {
         status.textContent = 'Für dieses Paket sind keine Seiten vorhanden.';
         return;
@@ -117,8 +132,23 @@
     }
   }
 
-  get('worksheets').addEventListener('click', () => download('worksheets', 'Lerngarten-Materialmappe-A4.pdf'));
-  get('solutions').addEventListener('click', () => download('solutions', 'Lerngarten-Loesungen-A4.pdf'));
+  get('package').addEventListener('change', event => {
+    const id = event.target.value;
+    get('package-name').value = '';
+    update(() => MaterialMappe.openPackage(id), '', id ? 'Paket geöffnet.' : 'Lose Blätter geöffnet.');
+  });
+  get('save-package').addEventListener('submit', event => {
+    event.preventDefault();
+    const input = get('package-name');
+    const sourceId = view.activeId;
+    update(async () => {
+      const saved = await MaterialMappe.savePackage(input.value, sourceId);
+      input.value = '';
+      return saved;
+    }, '', sourceId ? 'Paket kopiert und geöffnet.' : 'Paket gespeichert.');
+  });
+  get('worksheets').addEventListener('click', () => download('worksheets'));
+  get('solutions').addEventListener('click', () => download('solutions'));
   window.addEventListener('pageshow', refresh);
   window.addEventListener('focus', refresh);
   refresh();

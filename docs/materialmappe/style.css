@@ -28,3 +28,12 @@ button.primary{background:var(--green);color:white}
 .empty{padding:13px 0;margin:0;color:var(--muted)}
 @media(max-width:760px){header,main{padding:18px 15px}.layout{grid-template-columns:1fr}.collection{grid-row:1}}
 @media(max-width:480px){.materials li{align-items:flex-start;flex-direction:column;gap:8px}}
+
+.package-tools{background:#f5f7ed;border:1px solid var(--line);padding:14px;border-radius:10px;margin-bottom:22px}
+.package-tools label{display:block;font-size:14px;font-weight:700;margin-bottom:4px}
+.package-tools select,.package-tools input{padding:8px;border:1px solid #aabb9d;border-radius:7px;background:white;color:var(--ink);font:inherit;min-width:0}
+.package-tools select{display:block;width:100%;margin-bottom:12px}
+.package-tools form label{width:100%;margin:0}
+.package-tools input{flex:1 1 175px}
+.package-tools p{margin:10px 0 0}
+#active-title{overflow-wrap:anywhere}

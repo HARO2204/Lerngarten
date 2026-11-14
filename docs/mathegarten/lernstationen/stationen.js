@@ -10,7 +10,8 @@ const Lernstationen = (() => {
   ];
   const topics = {
     math: {title: 'Messen im Schulalltag', stations},
-    literacy: LeseStationen
+    literacy: LeseStationen,
+    english: SchoolbagStationen
   };
 
   function lines(p, y, count) {
@@ -88,7 +89,8 @@ const Lernstationen = (() => {
   function build(selected, optional, topic = 'math') {
     const {title, stations} = topics[topic];
     const subtitle = '2. Klasse · ' + title;
-    const pageOptions = topic === 'literacy' ? {kicker: 'LESEGARTEN · A4'} : {};
+    const kickers = {math: 'MATHEGARTEN', literacy: 'LESEGARTEN', english: 'ENGLISCHGARTEN'};
+    const pageOptions = {kicker: kickers[topic] + ' · A4'};
     if (selected.length < 2) throw Error('Wähle mindestens zwei Stationen aus.');
     const items = selected.map((id, index) => ({id, number: index + 1, optional: id === optional, ...stations[id]}));
     const worksheets = items.map(item => {
@@ -125,7 +127,7 @@ const Lernstationen = (() => {
     items.forEach((item, index) => {
       const y = 155 + index * 180;
       key.text(40, y, 'Station ' + item.number + ' · ' + item.title, 15, true);
-      key.para(40, y + 33, item.answer || answers[item.id], 515, 14);
+      key.para(40, y + 33, item.answer || answers[item.id], 515, 13);
     });
     return {title, labels, worksheets, solutions: [key.finish()]};
   }

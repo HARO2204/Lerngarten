@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wetterwoche · Lerngarten</title>
+  <link rel="stylesheet" href="../../materialmappe/style.css">
+  <link rel="stylesheet" href="../../klasse2/style.css">
+  <script defer src="../../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="../../mathegarten/a4-mathe.js?v=2"></script>
+  <script defer src="wetter.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="../">✳ Sachunterricht</a><a href="../../englisch/">Englischgarten</a></header>
+  <main>
+    <section class="intro"><h1>Unsere Wetterwoche</h1><p>Jeden Morgen beobachten, am Freitag auswerten und auf Englisch übers Wetter sprechen. Für die 2. Klasse.</p></section>
+    <div class="layout">
+      <aside class="panel">
+        <h2>Ablauf für die Woche</h2>
+        <p><strong>Jeden Morgen:</strong> Schaut zur gleichen Zeit aus dem Fenster. Kreuzt das Hauptwetter an. Sagt es zu zweit auf Englisch.</p>
+        <p><strong>Am Freitag:</strong> Übertragt die Kreuze als Striche und zeichnet die Säulen. Vergleicht die Ergebnisse in der Klasse.</p>
+      </aside>
+      <section class="collection" aria-labelledby="packet">
+        <h2 id="packet">A4-Material zum Ausdrucken</h2>
+        <div class="toolbar">
+          <button id="worksheets" class="primary" type="button">Wetterwoche als PDF</button>
+          <button id="solutions" type="button">Beispielauswertung als PDF</button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+        <label for="sheet">Vorschau</label>
+        <select id="sheet">
+          <option value="0">Wetter beobachten</option>
+          <option value="1">Strichliste und Säulendiagramm</option>
+          <option value="2">Englische Wetterkarten</option>
+          <option value="3">Beispielauswertung</option>
+        </select>
+        <div id="preview"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

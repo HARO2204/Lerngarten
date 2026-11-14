@@ -1,6 +1,8 @@
 (() => {
   const get = id => document.getElementById(id);
   const topic = get('topic');
+  const slugs = {literacy: 'lesen', english: 'englisch'};
+  const areas = {math: 'Mathegarten', literacy: 'Lesegarten', english: 'Englischgarten'};
   const stationOptions = get('station-options');
   const optional = get('optional');
   const buttons = ['worksheets', 'solutions', 'collect'].map(get);
@@ -33,7 +35,7 @@
     }));
     optional.replaceChildren(new Option('Alle drei sind Pflicht', ''), ...names.map(([id, station]) => new Option(station.title, id)));
     const url = new URL(location.href);
-    if (topic.value === 'literacy') url.searchParams.set('thema', 'lesen');
+    if (slugs[topic.value]) url.searchParams.set('thema', slugs[topic.value]);
     else url.searchParams.delete('thema');
     history.replaceState(null, '', url);
     render();
@@ -98,8 +100,9 @@
   selector.addEventListener('change', preview);
   get('worksheets').addEventListener('click', () => download('worksheets'));
   get('solutions').addEventListener('click', () => download('solutions'));
-  MaterialMappe.bindAdd(get('collect'), status, () => ({...packet, area: topic.value === 'literacy' ? 'Lesegarten · Lernstationen' : 'Mathegarten · Lernstationen'}));
+  MaterialMappe.bindAdd(get('collect'), status, () => ({...packet, area: areas[topic.value] + ' · Lernstationen'}));
   window.addEventListener('lerngarten-font-change', render);
-  if (new URLSearchParams(location.search).get('thema') === 'lesen') topic.value = 'literacy';
+  const slug = new URLSearchParams(location.search).get('thema');
+  topic.value = Object.keys(slugs).find(key => slugs[key] === slug) || 'math';
   changeTopic();
 })();

@@ -64,6 +64,25 @@ const Lernchecks = (() => {
       next: 'Ist die Antwort richtig, aber der Textbeleg fehlt? Lest die Frage noch einmal gemeinsam. Lasst das Kind die Wörter „rotes Ende“ im Text suchen und den ganzen Satz markieren.',
       link: './?werkstatt=reading',
       resource: 'Drei Lesestufen öffnen'
+    },
+    {
+      name: 'Einmaleins',
+      draw(p, x, y) {
+        p.text(x, y + 82, '1. Zeichne vier Zweiergruppen.', 12, true);
+        p.rect(x, y + 96, 225, 68, 'white');
+        p.text(x, y + 190, '2. Schreib die passende Malaufgabe.', 12, true);
+        p.text(x, y + 223, '_____ · _____ = _____', 13);
+        p.para(x, y + 255, '3. Tausch die beiden Faktoren. Was bleibt gleich?', 225, 12, true);
+        p.line(x, y + 300, x + 225, y + 300);
+      },
+      answers: [
+        ['1. Gruppen zeichnen', 'Vier getrennte Gruppen mit je zwei Punkten, insgesamt acht Punkte.'],
+        ['2. Malaufgabe', '4 · 2 = 8, passend zu vier Gruppen mit je zwei Punkten.'],
+        ['3. Tauschaufgabe', '2 · 4 = 8. Das Ergebnis bleibt gleich.']
+      ],
+      next: 'Wer die Gruppen verwechselt, kann vier Zweiergruppen zuerst mit Plättchen legen. Ordnet die Plättchen dann zu einem Rechteck und zählt einmal nach Reihen und einmal nach Spalten.',
+      link: './?werkstatt=times',
+      resource: 'Einmaleins entdecken öffnen'
     }
   ];
 

@@ -42,7 +42,7 @@
     updateButtons();
   }
 
-  function changeArea() {
+  function changeArea(initialTopic = 0) {
     const lesson = KlasseZwei.lessons[area.value];
     get('title').textContent = lesson.title;
     get('intro').textContent = lesson.intro;
@@ -50,9 +50,11 @@
     get('extra').hidden = !lesson.extra;
     get('extra').textContent = lesson.extra?.label || '';
     showOptions(topic, lesson.topics);
+    topic.value = initialTopic;
     showOptions(sheet, lesson.sheets);
     const url = new URL(location.href);
     url.searchParams.set('werkstatt', area.value);
+    if (area.value !== 'check') url.searchParams.delete('thema');
     history.replaceState(null, '', url);
     render();
   }
@@ -84,7 +86,7 @@
     }
   }
 
-  area.addEventListener('change', changeArea);
+  area.addEventListener('change', () => changeArea());
   topic.addEventListener('change', render);
   sheet.addEventListener('change', preview);
   get('worksheets').addEventListener('click', () => download('worksheets', 'Kinderblätter'));
@@ -97,5 +99,6 @@
   window.addEventListener('lerngarten-font-change', render);
   const initialArea = new URLSearchParams(location.search).get('werkstatt');
   if (Object.hasOwn(KlasseZwei.lessons, initialArea)) area.value = initialArea;
-  changeArea();
+  const deepLink = area.value === 'check' && new URLSearchParams(location.search).get('thema') === 'einmaleins';
+  changeArea(deepLink ? Lernchecks.topics.indexOf('Einmaleins') : 0);
 })();

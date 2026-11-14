@@ -1,5 +1,12 @@
 const KlasseZwei = (() => {
   const lessons = {
+    times: {
+      title: 'Einmaleins entdecken',
+      intro: 'Lege gleich große Gruppen, zeichne Punktefelder und entdecke Tauschaufgaben.',
+      label: 'Reihen auswählen',
+      topics: Einmaleins.topics,
+      sheets: Einmaleins.sheets
+    },
     check: {
       title: '5-Minuten-Lernchecks',
       intro: 'Drei kurze Aufgaben zum Abschluss einer Stunde in der 2. Klasse.',
@@ -236,7 +243,7 @@ const KlasseZwei = (() => {
     return {title, discussion: 'Gemeinsamer Abschluss: Lest zwei Sätze mit unterschiedlichen Anfängen vor. Was fällt euch an der Stelle des Verbs auf?', ...pairs(2, render)};
   }
 
-  const builders = {reading, shop, sentences, clock: UhrzeitWerkstatt.build, check: Lernchecks.build};
+  const builders = {reading, shop, sentences, clock: UhrzeitWerkstatt.build, check: Lernchecks.build, times: Einmaleins.build};
   function build(area, index) {
     return builders[area](index);
   }

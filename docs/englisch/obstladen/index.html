@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>At the fruit shop · Englischgarten</title>
+  <link rel="stylesheet" href="../../materialmappe/style.css">
+  <link rel="stylesheet" href="../../klasse2/style.css">
+  <style>audio{width:100%;margin-top:12px}.shop-actions{margin:14px 0}</style>
+  <script defer src="../../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="../../mathegarten/a4-mathe.js?v=2"></script>
+  <script defer src="../../materialmappe/sammlung.js"></script>
+  <script defer src="../obstsalat/salat.js"></script>
+  <script defer src="laden.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+<header><a class="brand" href="../">✳ Englischgarten</a><a href="../obstsalat/">Obstsalat und Obstkarten</a></header>
+<main>
+  <section class="intro">
+    <h1 lang="en">At the fruit shop</h1>
+    <p>Bestelle Obst auf Englisch, prüfe deine Bestellung und tausche die Rollen. Für die 2. Klasse.</p>
+  </section>
+  <div class="layout">
+    <aside class="panel" aria-labelledby="listen-title">
+      <h2 id="listen-title">Hören und nachspielen</h2>
+      <label for="dialogue">Hörbeispiel</label>
+      <select id="dialogue">
+        <option value="0">Hördialog 1</option>
+        <option value="1">Hördialog 2</option>
+        <option value="2">Knobelbestellung</option>
+      </select>
+      <audio id="audio" controls preload="none" aria-label="Englisches Hörbeispiel"></audio>
+      <details id="transcript">
+        <summary>Zum Mitlesen</summary>
+        <ol id="lines" lang="en"></ol>
+      </details>
+      <p class="small">Legt die <a href="../obstsalat/">Obstkarten aus der Obstsalat-Einheit</a> auf den Ladentisch. Zieht eine Einkaufskarte und spielt das Gespräch zu zweit.</p>
+    </aside>
+    <section class="collection" aria-labelledby="packet">
+      <h2 id="packet">A4-Material zum Ausdrucken</h2>
+      <div class="toolbar shop-actions">
+        <button id="worksheets" class="primary" type="button">Einkaufs- und Rollenkarten als PDF</button>
+        <button id="solutions" type="button">Vorleseliste und Lösungen als PDF</button>
+        <button id="collect" type="button">Zur Mappe hinzufügen</button>
+      </div>
+      <p id="status" class="status" role="status"></p>
+      <label for="sheet">Vorschau</label>
+      <select id="sheet">
+        <option value="0">Einkaufskarten</option>
+        <option value="1">Rollenkarten</option>
+        <option value="2">Bestellung prüfen</option>
+      </select>
+      <div id="preview"></div>
+    </section>
+  </div>
+</main>
+</body>
+</html>

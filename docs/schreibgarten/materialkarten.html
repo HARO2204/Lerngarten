@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Materialbox · Schreibgarten</title>
+  <style>
+    :root{color-scheme:light;--ink:#203d36;--green:#305e4b;--line:#b8c4b4;--wash:#edf1e7}
+    *{box-sizing:border-box}
+    body{margin:0;background:#f4f3eb;color:var(--ink);font:16px/1.5 Arial,sans-serif}
+    .toolbar,main{width:min(100% - 24px,210mm);margin:0 auto}
+    .toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 0}
+    a{color:var(--green)}
+    button{border:1px solid var(--green);border-radius:7px;background:var(--green);color:white;font:inherit;font-weight:bold;padding:8px 13px;cursor:pointer}
+    :focus-visible{outline:3px solid #ae8b2d;outline-offset:3px}
+    .sheet{background:white;border:1px solid #d8ded3;border-radius:12px;padding:clamp(14px,4vw,38px);margin:0 0 20px}
+    .meta{margin:0 0 4px;color:var(--green);font-size:.85rem;font-weight:bold}
+    h1,h2{margin:0 0 10px;font:clamp(25px,5vw,37px)/1.14 Georgia,serif}
+    h3{font-size:1.03rem;margin:18px 0 6px}
+    p,ol{margin:8px 0 12px}
+    ol{padding-inline-start:25px}
+    li{margin-block:6px}
+    .example{border-left:3px solid var(--green);background:var(--wash);padding:9px 12px}
+    .signs,.cards{display:grid;list-style:none;padding:0;margin:14px 0 0;gap:7px}
+    .signs{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .signs li,.cards li{position:relative;display:grid;place-content:center;min-height:54px;margin:0;padding:10px;border:1px dashed #5e6e5a;border-radius:4px;text-align:center;font-size:clamp(16px,3.2vw,22px);font-weight:bold;overflow-wrap:anywhere}
+    .cards li{min-height:70px;padding:23px 10px 10px}
+    .number{position:absolute;top:4px;left:9px;font-size:12px;font-weight:normal}
+    .solutions{columns:2;column-gap:24px}
+    .solutions li{break-inside:avoid}
+    @media(max-width:420px){.solutions{columns:1}.signs li{font-size:14px;padding:5px}}
+    @page{size:A4 portrait;margin:14mm}
+    @media print{
+      body{background:white;color:black;font-size:12pt;line-height:1.4}
+      .toolbar{display:none}
+      main{width:auto;margin:0}
+      .sheet{border:0;border-radius:0;padding:0;margin:0;break-after:page}
+      .sheet:last-child{break-after:auto}
+      h1,h2{font-size:25pt}
+      .meta{color:black}
+      .example{border-color:black;background:white}
+      .signs li,.cards li{border-color:#444;border-radius:0;break-inside:avoid;font-size:15pt}
+      .cards{gap:3mm}
+      .cards li{min-height:28mm}
+    }
+  </style>
+  <script src="materialkarten.js" defer></script>
+</head>
+<body>
+  <nav class="toolbar" aria-label="Materialbox">
+    <a href="lehrerbereich.html#material">← Zur Materialbox</a>
+    <button id="print" type="button">Drucken · A4</button>
+  </nav>
+  <main>
+    <section class="sheet">
+      <p class="meta">2. Klasse · Spielanleitung · 1 von 3</p>
+      <h1 id="title">Materialbox</h1>
+      <p id="goal"></p>
+      <h3>Vorbereitung</h3>
+      <p id="prep"></p>
+      <h3>So spielt ihr</h3>
+      <ol id="steps"></ol>
+      <p class="example" id="example"></p>
+      <p><strong>Zusatz für schnelle Kinder</strong><br><span id="extra"></span></p>
+      <h3>Sortierschilder zum Ausschneiden</h3>
+      <ul id="signs" class="signs"></ul>
+    </section>
+    <section class="sheet">
+      <p class="meta">2. Klasse · Karten · 2 von 3</p>
+      <h2 id="card-title"></h2>
+      <p id="card-instruction"></p>
+      <ol id="cards" class="cards"></ol>
+    </section>
+    <section class="sheet">
+      <p class="meta">2. Klasse · Lösungsblatt · 3 von 3</p>
+      <h2>So könnt ihr prüfen</h2>
+      <p>Die Zahlen beziehen sich auf die Karten.</p>
+      <ol id="solutions" class="solutions"></ol>
+      <p class="example" id="check"></p>
+    </section>
+    <noscript><p>Aktiviere JavaScript, um die Materialkarten zu laden.</p></noscript>
+  </main>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My favourite fruit · Englischgarten</title>
+  <link rel="stylesheet" href="../../materialmappe/style.css">
+  <link rel="stylesheet" href="../../klasse2/style.css">
+  <style>
+    .activities{display:grid;gap:16px}
+    .words{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:8px;margin-bottom:12px}
+    .words button{text-align:left;min-height:66px}
+    .words span{display:block;font-weight:400}
+    .roles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+    .roles p{background:#edf2e4;border-radius:8px;padding:10px;margin:0}
+    @media(max-width:480px){.roles{grid-template-columns:1fr}}
+  </style>
+  <script defer src="../../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="../../mathegarten/a4-mathe.js?v=2"></script>
+  <script defer src="../../materialmappe/sammlung.js"></script>
+  <script defer src="audio.js"></script>
+  <script defer src="obst.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+<header><a class="brand" href="../">✳ Englischgarten</a><a href="../../materialmappe/">Materialmappe</a></header>
+<main>
+  <section class="intro">
+    <h1 lang="en">My favourite fruit</h1>
+    <p>Hör dir die Obstwörter an und sprich sie nach. Frag danach ein Partnerkind, welches Obst es mag. Für die 2. Klasse.</p>
+  </section>
+  <div class="layout">
+    <div class="activities">
+      <section class="panel" aria-labelledby="listen-title">
+        <h2 id="listen-title">Hören und nachsprechen</h2>
+        <div id="words" class="words"></div>
+        <p id="audio-status" class="status" role="status"></p>
+      </section>
+      <section class="panel" aria-labelledby="quiz-title">
+        <h2 id="quiz-title">Hören und zuordnen</h2>
+        <p>Hör das Wort an und wähle die deutsche Bedeutung.</p>
+        <div class="toolbar">
+          <button id="quiz-listen" type="button">Wort anhören</button>
+          <button id="quiz-next" type="button" disabled>Nächstes Wort</button>
+        </div>
+        <p id="progress" class="small"></p>
+        <div id="choices" class="toolbar"></div>
+        <p id="feedback" class="status" role="status"></p>
+      </section>
+      <section class="panel" aria-labelledby="dialogue-title">
+        <h2 id="dialogue-title">Partnerdialog</h2>
+        <label for="fruit">Obst für die Frage</label>
+        <select id="fruit"></select>
+        <div class="roles">
+          <p><strong>Kind A</strong><br><span id="question" lang="en"></span></p>
+          <p><strong>Kind B</strong><br><span lang="en">Yes, I do.</span><br><span lang="en">No, I don’t.</span></p>
+        </div>
+        <div class="toolbar">
+          <button id="dialogue-listen" type="button">Frage anhören</button>
+          <button id="yes" type="button">Ja-Antwort anhören</button>
+          <button id="no" type="button">Nein-Antwort anhören</button>
+        </div>
+        <p class="small">Frag nach zwei Obstsorten. Dein Partnerkind antwortet, was für es stimmt. Tauscht dann die Rollen.</p>
+      </section>
+    </div>
+    <section class="collection" aria-labelledby="packet">
+      <h2 id="packet">A4-Material zum Ausdrucken</h2>
+      <div class="toolbar">
+        <button id="worksheets" class="primary" type="button">Arbeitsblatt und Karten als PDF</button>
+        <button id="solutions" type="button">Lösungen als PDF</button>
+        <button id="collect" type="button">Zur Mappe hinzufügen</button>
+      </div>
+      <p id="status" class="status" role="status"></p>
+      <label for="sheet">Vorschau</label>
+      <select id="sheet">
+        <option value="0">Wörter zuordnen und Partnerinterview</option>
+        <option value="1">Wort- und Rollenkarten</option>
+      </select>
+      <div id="preview"></div>
+    </section>
+  </div>
+</main>
+</body>
+</html>

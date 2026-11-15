@@ -1,5 +1,12 @@
 const KlasseZwei = (() => {
   const lessons = {
+    divide: {
+      title: 'Teilen und Verteilen',
+      intro: 'Verteile Plättchen gerecht, bilde gleich große Gruppen und prüfe mit dem Einmaleins.',
+      label: 'Reihen auswählen',
+      topics: Einmaleins.topics,
+      sheets: Teilen.sheets
+    },
     times: {
       title: 'Einmaleins entdecken',
       intro: 'Lege gleich große Gruppen, zeichne Punktefelder und entdecke Tauschaufgaben.',
@@ -243,7 +250,7 @@ const KlasseZwei = (() => {
     return {title, discussion: 'Gemeinsamer Abschluss: Lest zwei Sätze mit unterschiedlichen Anfängen vor. Was fällt euch an der Stelle des Verbs auf?', ...pairs(2, render)};
   }
 
-  const builders = {reading, shop, sentences, clock: UhrzeitWerkstatt.build, check: Lernchecks.build, times: Einmaleins.build};
+  const builders = {reading, shop, sentences, clock: UhrzeitWerkstatt.build, check: Lernchecks.build, times: Einmaleins.build, divide: Teilen.build};
   function build(area, index) {
     return builders[area](index);
   }

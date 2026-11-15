@@ -83,6 +83,24 @@ const Lernchecks = (() => {
       next: 'Wer die Gruppen verwechselt, kann vier Zweiergruppen zuerst mit Plättchen legen. Ordnet die Plättchen dann zu einem Rechteck und zählt einmal nach Reihen und einmal nach Spalten.',
       link: './?werkstatt=times',
       resource: 'Einmaleins entdecken öffnen'
+    },
+    {
+      name: 'Teilen und Verteilen',
+      draw(p, x, y) {
+        p.para(x, y + 80, 'Verteile 20 Plättchen gerecht an vier Kinder. Zeichne die Plättchen in die vier Kästchen.', 225, 12, true);
+        for (let i = 0; i < 4; i++) p.rect(x + i * 57, y + 148, 52, 48, 'white');
+        p.text(x, y + 223, 'Jedes Kind bekommt _____ Plättchen.', 11);
+        p.text(x, y + 251, 'Teilrechnung: 20 : _____ = _____', 12);
+        p.text(x, y + 286, 'Probe: _____ · _____ = _____', 12);
+      },
+      answers: [
+        ['1. Zeichnung', 'Vier Kästchen mit je fünf Plättchen.'],
+        ['2. Teilrechnung', '20 : 4 = 5. Jedes Kind bekommt fünf Plättchen.'],
+        ['3. Probe', '4 · 5 = 20. Vier Gruppen mit je fünf Plättchen ergeben 20.']
+      ],
+      next: 'Wenn die Gruppen verschieden groß sind, lass das Kind reihum je ein Plättchen in jedes Kästchen legen. Zählt danach die Plättchen in einer Gruppe und prüft die Gesamtzahl.',
+      link: './?werkstatt=divide',
+      resource: 'Teilen und Verteilen öffnen'
     }
   ];
 

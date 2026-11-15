@@ -99,6 +99,7 @@
   window.addEventListener('lerngarten-font-change', render);
   const initialArea = new URLSearchParams(location.search).get('werkstatt');
   if (Object.hasOwn(KlasseZwei.lessons, initialArea)) area.value = initialArea;
-  const deepLink = area.value === 'check' && new URLSearchParams(location.search).get('thema') === 'einmaleins';
-  changeArea(deepLink ? Lernchecks.topics.indexOf('Einmaleins') : 0);
+  const checkNames = {einmaleins: 'Einmaleins', teilen: 'Teilen und Verteilen'};
+  const checkName = checkNames[new URLSearchParams(location.search).get('thema')];
+  changeArea(area.value === 'check' ? Math.max(0, Lernchecks.topics.indexOf(checkName)) : 0);
 })();

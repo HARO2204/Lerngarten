@@ -83,5 +83,5 @@ const Einmaleins = (() => {
     };
   }
 
-  return {build, sheets, topics};
+  return {build, sheets, topics, selections};
 })();

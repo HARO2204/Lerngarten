@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Let’s make a fruit salad! · Englischgarten</title>
+  <link rel="stylesheet" href="../../materialmappe/style.css">
+  <link rel="stylesheet" href="../../klasse2/style.css">
+  <style>
+    .audio-buttons{display:grid;gap:7px;margin:12px 0}
+    .audio-buttons button{text-align:left}
+    .worksheet-actions{margin-top:18px}
+  </style>
+  <script defer src="../../schriften/eigene-schrift.js?v=1"></script>
+  <script defer src="../../mathegarten/a4-mathe.js?v=2"></script>
+  <script defer src="../../materialmappe/sammlung.js"></script>
+  <script defer src="salat.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+<header><a class="brand" href="../">✳ Englischgarten</a><a href="../obst/">My favourite fruit</a></header>
+<main>
+  <section class="intro">
+    <h1 lang="en">Let’s make a fruit salad!</h1>
+    <p>Hör das Rezept. Lege die Obstkarten in die Schüssel. Erfinde danach mit einem Partnerkind ein eigenes Rezept. Für die 2. Klasse.</p>
+  </section>
+  <div class="layout">
+    <section class="panel" aria-labelledby="listen-title">
+      <h2 id="listen-title">Hören und legen</h2>
+      <label for="recipe">Rezept auswählen</label>
+      <select id="recipe"><option value="0">Rezept 1</option><option value="1">Rezept 2</option></select>
+      <div class="audio-buttons" id="steps"></div>
+      <details id="transcript">
+        <summary>Sätze zum Mitlesen</summary>
+        <ol id="script" lang="en"></ol>
+      </details>
+      <h2 style="margin-top:20px">Finde den Fehler</h2>
+      <p>Auf dem Arbeitsblatt liegen zwei Apfelkarten. Hör den Satz und streiche die Karte durch, die zu viel ist.</p>
+      <button id="puzzle" type="button">Knobelsatz anhören</button>
+      <p id="audio-status" class="status" role="status"></p>
+    </section>
+    <section class="collection" aria-labelledby="packet">
+      <h2 id="packet">A4-Material zum Ausdrucken</h2>
+      <div class="toolbar worksheet-actions">
+        <button id="worksheets" class="primary" type="button">Rezeptmatte und Karten als PDF</button>
+        <button id="solutions" type="button">Vorleseliste und Lösungen als PDF</button>
+        <button id="collect" type="button">Zur Mappe hinzufügen</button>
+      </div>
+      <p id="status" class="status" role="status"></p>
+      <label for="sheet">Vorschau</label>
+      <select id="sheet">
+        <option value="0">Rezeptmatte</option>
+        <option value="1">Obstkarten zum Ausschneiden</option>
+        <option value="2">Partnerrezept und Knobelaufgabe</option>
+      </select>
+      <div id="preview"></div>
+    </section>
+  </div>
+</main>
+</body>
+</html>

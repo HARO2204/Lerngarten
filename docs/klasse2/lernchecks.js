@@ -101,6 +101,18 @@ const Lernchecks = (() => {
       next: 'Wenn die Gruppen verschieden groß sind, lass das Kind reihum je ein Plättchen in jedes Kästchen legen. Zählt danach die Plättchen in einer Gruppe und prüft die Gesamtzahl.',
       link: './?werkstatt=divide',
       resource: 'Teilen und Verteilen öffnen'
+    },
+    {
+      name: 'Spiegelbilder',
+      draw: Spiegelbilder.check,
+      answers: [
+        ['Spiegelbild prüfen', 'Die gespiegelten Punkte liegen auf derselben Höhe wie ihre Partnerpunkte. Sie sind von der Achse jeweils gleich weit entfernt.'],
+        ['Abstände prüfen', 'Von oben nach unten führt die gespiegelte Linie von der Achse einen Schritt nach rechts, einen nach unten, einen nach rechts, einen nach unten, einen nach rechts und drei nach unten.'],
+        ['Unterster Punkt rechts', 'Er liegt drei Kästchen rechts der Spiegelachse.']
+      ],
+      next: 'Legt einen kleinen Spiegel auf die Achse. Markiert einen Punkt und zählt gemeinsam seinen Abstand zur Achse. Setzt den Partnerpunkt auf derselben Höhe gleich weit auf der anderen Seite.',
+      link: './?werkstatt=mirror',
+      resource: 'Spiegelbilder entdecken öffnen'
     }
   ];
 

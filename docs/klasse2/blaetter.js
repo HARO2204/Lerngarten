@@ -1,5 +1,12 @@
 const KlasseZwei = (() => {
   const lessons = {
+    mirror: {
+      title: 'Spiegelbilder entdecken',
+      intro: 'Falte Papier, finde Spiegelachsen und ergänze Muster im Kästchenraster.',
+      label: 'Spiegelachsen',
+      topics: Spiegelbilder.topics,
+      sheets: Spiegelbilder.sheets
+    },
     divide: {
       title: 'Teilen und Verteilen',
       intro: 'Verteile Plättchen gerecht, bilde gleich große Gruppen und prüfe mit dem Einmaleins.',
@@ -250,7 +257,7 @@ const KlasseZwei = (() => {
     return {title, discussion: 'Gemeinsamer Abschluss: Lest zwei Sätze mit unterschiedlichen Anfängen vor. Was fällt euch an der Stelle des Verbs auf?', ...pairs(2, render)};
   }
 
-  const builders = {reading, shop, sentences, clock: UhrzeitWerkstatt.build, check: Lernchecks.build, times: Einmaleins.build, divide: Teilen.build};
+  const builders = {reading, shop, sentences, clock: UhrzeitWerkstatt.build, check: Lernchecks.build, times: Einmaleins.build, divide: Teilen.build, mirror: Spiegelbilder.build};
   function build(area, index) {
     return builders[area](index);
   }

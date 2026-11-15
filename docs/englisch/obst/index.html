@@ -20,7 +20,8 @@
   <script defer src="../../materialmappe/sammlung.js"></script>
   <script defer src="audio.js"></script>
   <script defer src="obst.js"></script>
-  <script defer src="app.js"></script>
+  <script defer src="../hoertempo.js"></script>
+  <script defer src="app.js?v=2"></script>
 </head>
 <body>
 <header><a class="brand" href="../">✳ Englischgarten</a><a href="../../materialmappe/">Materialmappe</a></header>
@@ -34,7 +35,9 @@
     <div class="activities">
       <section class="panel" aria-labelledby="listen-title">
         <h2 id="listen-title">Hören und nachsprechen</h2>
-        <div id="words" class="words"></div>
+        <label for="listen-speed">Hörtempo</label>
+      <select id="listen-speed"><option value="1">Langsam</option><option value="0.85">Noch langsamer</option></select>
+      <div id="words" class="words"></div>
         <p id="audio-status" class="status" role="status"></p>
       </section>
       <section class="panel" aria-labelledby="quiz-title">

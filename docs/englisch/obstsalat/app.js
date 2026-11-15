@@ -1,6 +1,7 @@
 (() => {
   const get = id => document.getElementById(id);
   const audio = new Audio();
+  const applyTempo = Hoertempo.bind(audio, get('listen-speed'), .84);
   const status = get('status');
   let busy = false;
 
@@ -9,6 +10,7 @@
     message.textContent = '';
     audio.pause();
     audio.src = 'audio-' + (recipe + 1) + '-' + (step + 1) + '.mp3';
+    applyTempo();
     audio.play().catch(error => {
       if (error.name !== 'AbortError') message.textContent = 'Das Hörbeispiel konnte nicht abgespielt werden.';
     });

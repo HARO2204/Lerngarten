@@ -12,7 +12,8 @@
   <script defer src="../../materialmappe/sammlung.js"></script>
   <script defer src="../obstsalat/salat.js"></script>
   <script defer src="laden.js"></script>
-  <script defer src="app.js"></script>
+  <script defer src="../hoertempo.js"></script>
+  <script defer src="app.js?v=2"></script>
 </head>
 <body>
 <header><a class="brand" href="../">✳ Englischgarten</a><a href="../obstsalat/">Obstsalat und Obstkarten</a></header>
@@ -30,7 +31,12 @@
         <option value="1">Hördialog 2</option>
         <option value="2">Knobelbestellung</option>
       </select>
+      <label for="listen-speed">Hörtempo</label>
+      <select id="listen-speed"><option value="1">Langsam</option><option value="0.85">Noch langsamer</option></select>
       <audio id="audio" controls preload="none" aria-label="Englisches Hörbeispiel"></audio>
+      <p class="small">Hör den ganzen Dialog oder wiederhole einen Satz.</p>
+      <div id="sentence-buttons" class="toolbar" aria-label="Einzelne Sätze anhören"></div>
+      <p id="audio-status" class="status" role="status"></p>
       <details id="transcript">
         <summary>Zum Mitlesen</summary>
         <ol id="lines" lang="en"></ol>

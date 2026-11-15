@@ -113,6 +113,18 @@ const Lernchecks = (() => {
       next: 'Legt einen kleinen Spiegel auf die Achse. Markiert einen Punkt und zählt gemeinsam seinen Abstand zur Achse. Setzt den Partnerpunkt auf derselben Höhe gleich weit auf der anderen Seite.',
       link: './?werkstatt=mirror',
       resource: 'Spiegelbilder entdecken öffnen'
+    },
+    {
+      name: 'Wege auf dem Raster',
+      draw: Rasterwege.check,
+      answers: [
+        ['Weg zeichnen', 'Vom Feld S zwei Kästchen nach rechts und ein Kästchen nach oben.'],
+        ['Ziel', 'Der Weg endet bei A.'],
+        ['Schritte zählen', '2 + 1 = 3 Schritte. Das Startfeld zählt nicht als Schritt.']
+      ],
+      next: 'Zählt gemeinsam die Übergänge von Feld zu Feld. Wenn rechts und links verwechselt werden, legt einen Pfeil nach rechts neben das Raster und lasst das Kind die erste Strecke mit dem Finger nachfahren.',
+      link: './?werkstatt=routes',
+      resource: 'Wege auf dem Raster öffnen'
     }
   ];
 

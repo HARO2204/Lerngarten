@@ -1,5 +1,12 @@
 const KlasseZwei = (() => {
   const lessons = {
+    routes: {
+      title: 'Wege auf dem Raster',
+      intro: 'Folge einer Pfeilspur, beschreibe einen Weg und finde kurze Wege zum selben Ziel.',
+      label: 'Paket',
+      topics: ['Wege im Garten'],
+      sheets: ['Blatt 1 · Mit Hilfe', 'Blatt 2 · Zum Üben', 'Blatt 3 · Zum Knobeln']
+    },
     mirror: {
       title: 'Spiegelbilder entdecken',
       intro: 'Falte Papier, finde Spiegelachsen und ergänze Muster im Kästchenraster.',
@@ -257,7 +264,7 @@ const KlasseZwei = (() => {
     return {title, discussion: 'Gemeinsamer Abschluss: Lest zwei Sätze mit unterschiedlichen Anfängen vor. Was fällt euch an der Stelle des Verbs auf?', ...pairs(2, render)};
   }
 
-  const builders = {reading, shop, sentences, clock: UhrzeitWerkstatt.build, check: Lernchecks.build, times: Einmaleins.build, divide: Teilen.build, mirror: Spiegelbilder.build};
+  const builders = {reading, shop, sentences, clock: UhrzeitWerkstatt.build, check: Lernchecks.build, times: Einmaleins.build, divide: Teilen.build, mirror: Spiegelbilder.build, routes: Rasterwege.build};
   function build(area, index) {
     return builders[area](index);
   }

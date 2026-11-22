@@ -1,9 +1,9 @@
 const MathMix=(()=>{
-const types={add:'Plusaufgaben',sub:'Minusaufgaben',mul:'Malaufgaben',div:'Geteiltaufgaben',missing:'Ergänzungsaufgaben',neighbors:'Nachbarzahlen',sequence:'Zahlenfolgen',snake:'Kopfrechenschlangen',house:'Mathehäuser',pyramid:'Zahlenpyramiden',lovers:'Verliebte Zahlen · zur 10',story:'Sachaufgaben'};
-const defaults=()=>({version:1,max:100,level:2,seed:1,shuffle:false,answerSnake:false,tables:[2,4,5],counts:{add:4,sub:4,mul:2,div:2,missing:2,neighbors:0,sequence:0,snake:1,house:1,pyramid:1,lovers:0,story:0}});
+const types={add:'Plusaufgaben',sub:'Minusaufgaben',mul:'Malaufgaben',div:'Geteiltaufgaben',dots:'Punktebilder · Malrechnen',missing:'Ergänzungsaufgaben',neighbors:'Nachbarzahlen',sequence:'Zahlenfolgen',snake:'Kopfrechenschlangen',house:'Mathehäuser',pyramid:'Zahlenpyramiden',lovers:'Verliebte Zahlen · zur 10',story:'Sachaufgaben'};
+const defaults=()=>({version:1,max:100,level:2,seed:1,shuffle:false,answerSnake:false,tables:[2,4,5],counts:{add:4,sub:4,mul:2,div:2,dots:0,missing:2,neighbors:0,sequence:0,snake:1,house:1,pyramid:1,lovers:0,story:0}});
 function normalize(s){
 if(!s||typeof s!=='object'||!s.counts||typeof s.counts!=='object')return s;
-return {...s,answerSnake:s.answerSnake===undefined?false:s.answerSnake,tables:s.tables===undefined?[2,4,5]:s.tables,counts:{mul:0,div:0,...s.counts}};
+return {...s,answerSnake:s.answerSnake===undefined?false:s.answerSnake,tables:s.tables===undefined?[2,4,5]:s.tables,counts:{mul:0,div:0,dots:0,...s.counts}};
 }
 function valid(s){s=normalize(s);return !!s&&s.version===1&&[10,20,50,100,1000].includes(s.max)&&[1,2,3].includes(s.level)&&Number.isInteger(s.seed)&&typeof s.shuffle==='boolean'&&typeof s.answerSnake==='boolean'&&Array.isArray(s.tables)&&s.tables.length>0&&s.tables.every(n=>Number.isInteger(n)&&n>=1&&n<=10)&&new Set(s.tables).size===s.tables.length&&s.counts&&Object.keys(s.counts).every(k=>Object.hasOwn(types,k))&&Object.keys(types).every(k=>Number.isInteger(s.counts[k])&&s.counts[k]>=0&&s.counts[k]<=20)&&Object.values(s.counts).reduce((a,n)=>a+n,0)>=1&&Object.values(s.counts).reduce((a,n)=>a+n,0)<=60}
 function build(s){s=normalize(s);if(s&&Array.isArray(s.tables)&&s.tables.length===0)throw Error('Wähle mindestens eine Einmaleinsreihe.');if(!valid(s))throw Error('Wähle insgesamt 1 bis 60 Aufgaben, je Aufgabenart höchstens 20.');let seed=s.seed;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296},int=(a,b)=>a+Math.floor(random()*(b-a+1)),pick=a=>a[int(0,a.length-1)],tasks=[];
@@ -11,12 +11,12 @@ const facts=[];
 for(const table of s.tables)for(let factor=1;factor<=10;factor++){
 if(table*factor<=s.max)facts.push({table,factor});
 }
-if((s.counts.mul||s.counts.div)&&!facts.length)throw Error('Für diese Reihen ist der Zahlenraum zu klein. Wähle einen größeren Zahlenraum oder eine kleinere Reihe.');
+if((s.counts.mul||s.counts.div||s.counts.dots)&&!facts.length)throw Error('Für diese Reihen ist der Zahlenraum zu klein. Wähle einen größeren Zahlenraum oder eine kleinere Reihe.');
 function equation(op){for(let i=0;i<100;i++){const a=int(0,s.max),limit=op==='+'?s.max-a:a;if(limit<1)continue;const b=int(1,s.level===1?Math.min(9,limit):limit),result=op==='+'?a+b:a-b,easy=op==='+'?a%10+b%10<10:a%10>=b%10;if(s.level===1&&!easy)continue;return{a,b,result,op}}return{a:1,b:1,result:op==='+'?2:0,op}}
 for(const [type,count]of Object.entries(s.counts))for(let j=0;j<count;j++){let t={type};
-if(type==='mul'||type==='div'){
+if(type==='mul'||type==='div'||type==='dots'){
 const {table,factor}=pick(facts);
-Object.assign(t,type==='mul'?{a:factor,b:table,result:factor*table,op:'·'}:{a:factor*table,b:table,result:factor,op:':'});
+Object.assign(t,type!=='div'?{a:factor,b:table,result:factor*table,op:'·'}:{a:factor*table,b:table,result:factor,op:':'});
 t.slot='result';
 }
 if(['add','sub','missing','story'].includes(type)){Object.assign(t,equation(type==='add'?'+':type==='sub'?'-':pick(['+','-'])));t.slot=type==='missing'?pick(['a','b']):'result';if(type==='story')t.question=t.op==='+'?'Für eine Themenwand liegen '+t.a+' Bildkarten bereit. Es kommen '+t.b+' dazu. Wie viele sind es jetzt?':'In einer Box liegen '+t.a+' Stifte. '+t.b+' werden herausgenommen. Wie viele bleiben?'}
@@ -55,8 +55,14 @@ p.text(position.x,position.y+5,position.value,13,true,'#203d36','middle');
 }
 }
 function pages(model,solutions=false,title='Mein Mathe-Mix'){const all=[],s=model.s,subtitle='Zahlenraum 0 bis '+s.max+' · '+['Mit viel Hilfe','Mit wenig Hilfe','Selbstständig'][s.level-1];for(const answer of solutions?[false,true]:[false]){let p=MathA4.page(title,subtitle,{solution:answer}),y=151,pending=0,col=0,pageNumber=1,pageValues=[];const contentBottom=s.answerSnake?640:750;function flush(){if(col){y+=pending+14;col=0;pending=0}}function finish(){flush();if(s.answerSnake)solutionSnake(p,pageValues,s.seed+pageNumber);p.text(40,774,answer?'Lösungen zum selben Aufgabenblatt.':'___ Ich habe meine Ergebnisse überprüft.',9);all.push(p.finish())}function newPage(){finish();pageNumber++;p=MathA4.page(title,subtitle,{solution:answer,continuation:true});y=151;pending=0;col=0;pageValues=[]}
-for(const t of model.tasks){const full=['snake','sequence','story'].includes(t.type),height=t.type==='snake'?100:t.type==='sequence'?66:t.type==='house'?191:t.type==='pyramid'?160:t.type==='lovers'?131:t.type==='story'?MathA4.wrap(t.index+'. '+t.question,515,12.5).length*17.5+82:64;if(full)flush();if(y+height>contentBottom)newPage();if(['add','sub','mul','div','missing'].includes(t.type))pageValues.push(t.slot==='a'?t.a:t.slot==='b'?t.b:t.result);const x=40+(full?0:col*265),w=full?515:250;const titles={add:'Rechne plus.',sub:'Rechne minus.',mul:'Rechne mal.',div:'Rechne geteilt.',missing:'Ergänze.',neighbors:'Vorher und nachher.',sequence:'Setze die Folge fort.',snake:'Rechne im Kopf weiter.',house:'Jede Etage ergibt die Dachzahl.',pyramid:'Oben steht die Summe der zwei Steine darunter.',lovers:'Zusammen sind wir 10.',story:'Lies und rechne.'};p.para(x,y,t.index+'. '+titles[t.type],w,t.type==='pyramid'?10.5:11.5,true,1.25);
+for(const t of model.tasks){const full=['snake','sequence','story'].includes(t.type),height=t.type==='dots'?244:t.type==='snake'?100:t.type==='sequence'?66:t.type==='house'?191:t.type==='pyramid'?160:t.type==='lovers'?131:t.type==='story'?MathA4.wrap(t.index+'. '+t.question,515,12.5).length*17.5+82:64;if(full)flush();if(y+height>contentBottom)newPage();if(['add','sub','mul','div','dots','missing'].includes(t.type))pageValues.push(t.slot==='a'?t.a:t.slot==='b'?t.b:t.result);const x=40+(full?0:col*265),w=full?515:250;const titles={add:'Rechne plus.',sub:'Rechne minus.',mul:'Rechne mal.',div:'Rechne geteilt.',dots:'Zähle die Reihen und rechne mal.',missing:'Ergänze.',neighbors:'Vorher und nachher.',sequence:'Setze die Folge fort.',snake:'Rechne im Kopf weiter.',house:'Jede Etage ergibt die Dachzahl.',pyramid:'Oben steht die Summe der zwei Steine darunter.',lovers:'Zusammen sind wir 10.',story:'Lies und rechne.'};p.para(x,y,t.index+'. '+titles[t.type],w,t.type==='pyramid'?10.5:11.5,true,1.25);
 if(['add','sub','mul','div','missing'].includes(t.type)){const text=(t.slot==='a'&&!answer?'____':t.a)+' '+t.op+' '+(t.slot==='b'&&!answer?'____':t.b)+' = '+(t.slot==='result'&&!answer?'____':t.result);p.text(x,y+39,text,Math.min(19,w/Math.max(1,MathA4.width(text,1))),false)}
+if(t.type==='dots'){
+const step=15,left=x+24,top=y+37;
+for(let row=0;row<t.a;row++)for(let column=0;column<t.b;column++)p.circle(left+column*step,top+row*step,3,'#345e48');
+p.text(x,y+204,(answer||s.level===1?t.a:'___')+' Reihen mit je '+(answer||s.level===1?t.b:'___')+' Punkten',12);
+p.text(x,y+231,(answer||s.level===1?t.a:'___')+' · '+(answer||s.level===1?t.b:'___')+' = '+(answer?t.result:'___'),18);
+}
 if(t.type==='neighbors')p.text(x,y+39,(answer?t.value-1:'____')+' | '+t.value+' | '+(answer?t.value+1:'____'),18);
 if(t.type==='sequence')p.text(x,y+42,t.values.map((n,i)=>answer||i<3?n:'____').join(' · '),18);
 if(t.type==='snake'){const box=61,gap=49,top=y+37;for(let i=0;i<5;i++){const xx=x+i*(box+gap);p.rect(xx,top,box,32,'#f4f6ec','#92a084',7);p.text(xx+box/2,top+22,answer||i===0||(s.level===1&&i===1)?t.values[i]:'___',16,false,'#243e35','middle');if(i<4){p.line(xx+box+3,top+16,xx+box+gap-4,top+16);p.path(`M ${xx+box+gap-4} ${top+16} l -5 -3 l 0 6 Z`,'#64785b',.5,'#64785b');p.text(xx+box+gap/2,top+7,t.ops[i].op+t.ops[i].b,11,true,'#243e35','middle')}}}
@@ -68,5 +74,6 @@ if(full)y+=height+15;else{pending=Math.max(pending,height);col++;if(col===2)flus
 finish()}return all}
 return{types,defaults,normalize,valid,build,pages};
 })();
+
 
 

@@ -1,11 +1,11 @@
 const MathMix=(()=>{
 const types={add:'Plusaufgaben',sub:'Minusaufgaben',mul:'Malaufgaben',div:'Geteiltaufgaben',missing:'Ergänzungsaufgaben',neighbors:'Nachbarzahlen',sequence:'Zahlenfolgen',snake:'Kopfrechenschlangen',house:'Mathehäuser',pyramid:'Zahlenpyramiden',lovers:'Verliebte Zahlen · zur 10',story:'Sachaufgaben'};
-const defaults=()=>({version:1,max:100,level:2,seed:1,shuffle:false,tables:[2,4,5],counts:{add:4,sub:4,mul:2,div:2,missing:2,neighbors:0,sequence:0,snake:1,house:1,pyramid:1,lovers:0,story:0}});
+const defaults=()=>({version:1,max:100,level:2,seed:1,shuffle:false,answerSnake:false,tables:[2,4,5],counts:{add:4,sub:4,mul:2,div:2,missing:2,neighbors:0,sequence:0,snake:1,house:1,pyramid:1,lovers:0,story:0}});
 function normalize(s){
 if(!s||typeof s!=='object'||!s.counts||typeof s.counts!=='object')return s;
-return {...s,tables:s.tables===undefined?[2,4,5]:s.tables,counts:{mul:0,div:0,...s.counts}};
+return {...s,answerSnake:s.answerSnake===undefined?false:s.answerSnake,tables:s.tables===undefined?[2,4,5]:s.tables,counts:{mul:0,div:0,...s.counts}};
 }
-function valid(s){s=normalize(s);return !!s&&s.version===1&&[10,20,50,100,1000].includes(s.max)&&[1,2,3].includes(s.level)&&Number.isInteger(s.seed)&&typeof s.shuffle==='boolean'&&Array.isArray(s.tables)&&s.tables.length>0&&s.tables.every(n=>Number.isInteger(n)&&n>=1&&n<=10)&&new Set(s.tables).size===s.tables.length&&s.counts&&Object.keys(s.counts).every(k=>Object.hasOwn(types,k))&&Object.keys(types).every(k=>Number.isInteger(s.counts[k])&&s.counts[k]>=0&&s.counts[k]<=20)&&Object.values(s.counts).reduce((a,n)=>a+n,0)>=1&&Object.values(s.counts).reduce((a,n)=>a+n,0)<=60}
+function valid(s){s=normalize(s);return !!s&&s.version===1&&[10,20,50,100,1000].includes(s.max)&&[1,2,3].includes(s.level)&&Number.isInteger(s.seed)&&typeof s.shuffle==='boolean'&&typeof s.answerSnake==='boolean'&&Array.isArray(s.tables)&&s.tables.length>0&&s.tables.every(n=>Number.isInteger(n)&&n>=1&&n<=10)&&new Set(s.tables).size===s.tables.length&&s.counts&&Object.keys(s.counts).every(k=>Object.hasOwn(types,k))&&Object.keys(types).every(k=>Number.isInteger(s.counts[k])&&s.counts[k]>=0&&s.counts[k]<=20)&&Object.values(s.counts).reduce((a,n)=>a+n,0)>=1&&Object.values(s.counts).reduce((a,n)=>a+n,0)<=60}
 function build(s){s=normalize(s);if(s&&Array.isArray(s.tables)&&s.tables.length===0)throw Error('Wähle mindestens eine Einmaleinsreihe.');if(!valid(s))throw Error('Wähle insgesamt 1 bis 60 Aufgaben, je Aufgabenart höchstens 20.');let seed=s.seed;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296},int=(a,b)=>a+Math.floor(random()*(b-a+1)),pick=a=>a[int(0,a.length-1)],tasks=[];
 const facts=[];
 for(const table of s.tables)for(let factor=1;factor<=10;factor++){
@@ -28,8 +28,34 @@ if(type==='pyramid'){const lim=Math.max(1,Math.floor(s.max/4));t.base=[int(0,lim
 if(type==='lovers'){t.left=int(0,10);t.right=10-t.left}
 tasks.push(t)}
 if(s.shuffle)for(let i=tasks.length-1;i>0;i--){const j=int(0,i);[tasks[i],tasks[j]]=[tasks[j],tasks[i]]}tasks.forEach((t,i)=>t.index=i+1);return{s:{...s,counts:{...s.counts}},tasks}}
-function pages(model,solutions=false,title='Mein Mathe-Mix'){const all=[],s=model.s,subtitle='Zahlenraum 0 bis '+s.max+' · '+['Mit viel Hilfe','Mit wenig Hilfe','Selbstständig'][s.level-1];for(const answer of solutions?[false,true]:[false]){let p=MathA4.page(title,subtitle,{solution:answer}),y=151,pending=0,col=0,pageNumber=1;function flush(){if(col){y+=pending+14;col=0;pending=0}}function finish(){flush();p.text(40,774,answer?'Lösungen zum selben Aufgabenblatt.':'___ Ich habe meine Ergebnisse überprüft.',9);all.push(p.finish())}function newPage(){finish();pageNumber++;p=MathA4.page(title,subtitle,{solution:answer,continuation:true});y=151;pending=0;col=0}
-for(const t of model.tasks){const full=['snake','sequence','story'].includes(t.type),height=t.type==='snake'?100:t.type==='sequence'?66:t.type==='house'?191:t.type==='pyramid'?160:t.type==='lovers'?131:t.type==='story'?MathA4.wrap(t.index+'. '+t.question,515,12.5).length*17.5+82:64;if(full)flush();if(y+height>750)newPage();const x=40+(full?0:col*265),w=full?515:250;const titles={add:'Rechne plus.',sub:'Rechne minus.',mul:'Rechne mal.',div:'Rechne geteilt.',missing:'Ergänze.',neighbors:'Vorher und nachher.',sequence:'Setze die Folge fort.',snake:'Rechne im Kopf weiter.',house:'Jede Etage ergibt die Dachzahl.',pyramid:'Oben steht die Summe der zwei Steine darunter.',lovers:'Zusammen sind wir 10.',story:'Lies und rechne.'};p.para(x,y,t.index+'. '+titles[t.type],w,t.type==='pyramid'?10.5:11.5,true,1.25);
+function solutionSnake(p,values,seed){
+if(!values.length)return;
+const numbers=[...values];
+for(let i=numbers.length-1;i>0;i--){
+seed=(Math.imul(seed,1664525)+1013904223)>>>0;
+const j=seed%(i+1);
+[numbers[i],numbers[j]]=[numbers[j],numbers[i]];
+}
+p.text(40,661,'Lösungsschlange · Finde die passenden Zahlen.',11,true);
+const positions=numbers.map((value,index)=>{
+const row=Math.floor(index/8),column=index%8;
+return {value,x:79+(row%2?7-column:column)*62,y:688+row*38};
+});
+for(let i=1;i<positions.length;i++){
+const previous=positions[i-1],current=positions[i];
+if(previous.y===current.y)p.line(previous.x,previous.y,current.x,current.y,'#8ba774',16);
+else p.path('M '+previous.x+' '+previous.y+' Q '+(previous.x+30)+' '+((previous.y+current.y)/2)+' '+current.x+' '+current.y,'#8ba774',16);
+}
+p.circle(48,688,15,'#8ba774');
+p.circle(44,682,2,'#203d36');
+p.line(33,693,28,695,'#567348',1);
+for(const position of positions){
+p.circle(position.x,position.y,17,'#edf3e5');
+p.text(position.x,position.y+5,position.value,13,true,'#203d36','middle');
+}
+}
+function pages(model,solutions=false,title='Mein Mathe-Mix'){const all=[],s=model.s,subtitle='Zahlenraum 0 bis '+s.max+' · '+['Mit viel Hilfe','Mit wenig Hilfe','Selbstständig'][s.level-1];for(const answer of solutions?[false,true]:[false]){let p=MathA4.page(title,subtitle,{solution:answer}),y=151,pending=0,col=0,pageNumber=1,pageValues=[];const contentBottom=s.answerSnake?640:750;function flush(){if(col){y+=pending+14;col=0;pending=0}}function finish(){flush();if(s.answerSnake)solutionSnake(p,pageValues,s.seed+pageNumber);p.text(40,774,answer?'Lösungen zum selben Aufgabenblatt.':'___ Ich habe meine Ergebnisse überprüft.',9);all.push(p.finish())}function newPage(){finish();pageNumber++;p=MathA4.page(title,subtitle,{solution:answer,continuation:true});y=151;pending=0;col=0;pageValues=[]}
+for(const t of model.tasks){const full=['snake','sequence','story'].includes(t.type),height=t.type==='snake'?100:t.type==='sequence'?66:t.type==='house'?191:t.type==='pyramid'?160:t.type==='lovers'?131:t.type==='story'?MathA4.wrap(t.index+'. '+t.question,515,12.5).length*17.5+82:64;if(full)flush();if(y+height>contentBottom)newPage();if(['add','sub','mul','div','missing'].includes(t.type))pageValues.push(t.slot==='a'?t.a:t.slot==='b'?t.b:t.result);const x=40+(full?0:col*265),w=full?515:250;const titles={add:'Rechne plus.',sub:'Rechne minus.',mul:'Rechne mal.',div:'Rechne geteilt.',missing:'Ergänze.',neighbors:'Vorher und nachher.',sequence:'Setze die Folge fort.',snake:'Rechne im Kopf weiter.',house:'Jede Etage ergibt die Dachzahl.',pyramid:'Oben steht die Summe der zwei Steine darunter.',lovers:'Zusammen sind wir 10.',story:'Lies und rechne.'};p.para(x,y,t.index+'. '+titles[t.type],w,t.type==='pyramid'?10.5:11.5,true,1.25);
 if(['add','sub','mul','div','missing'].includes(t.type)){const text=(t.slot==='a'&&!answer?'____':t.a)+' '+t.op+' '+(t.slot==='b'&&!answer?'____':t.b)+' = '+(t.slot==='result'&&!answer?'____':t.result);p.text(x,y+39,text,Math.min(19,w/Math.max(1,MathA4.width(text,1))),false)}
 if(t.type==='neighbors')p.text(x,y+39,(answer?t.value-1:'____')+' | '+t.value+' | '+(answer?t.value+1:'____'),18);
 if(t.type==='sequence')p.text(x,y+42,t.values.map((n,i)=>answer||i<3?n:'____').join(' · '),18);
@@ -42,4 +68,5 @@ if(full)y+=height+15;else{pending=Math.max(pending,height);col++;if(col===2)flus
 finish()}return all}
 return{types,defaults,normalize,valid,build,pages};
 })();
+
 

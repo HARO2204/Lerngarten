@@ -34,7 +34,12 @@ window.LerngartenFont = (() => {
     for(const source of svgs){
       const doc=new DOMParser().parseFromString(source,'image/svg+xml');if(doc.querySelector('parsererror'))throw Error('Die Druckvorlage konnte nicht gelesen werden.');const svg=doc.documentElement;
       const vb=svg.getAttribute('viewBox').split(/\s+/).map(Number),texts=active?[...svg.querySelectorAll('text')]:[...svg.querySelectorAll('text[font-family="LerngartenEigene"]')];
-      const labels=texts.map(text=>({text:text.textContent,x:+text.getAttribute('x')||0,y:+text.getAttribute('y')||0,size:+text.getAttribute('font-size')||12,fill:text.getAttribute('fill')||'#111',anchor:text.getAttribute('text-anchor')||'start'}));texts.forEach(text=>text.remove());
+      const labels=texts.map(text=>{
+const group=text.closest('g[data-task-scale]'),scale=group?Number(group.getAttribute('data-task-scale')):1;
+const originX=group?Number(group.getAttribute('data-task-x')):0,originY=group?Number(group.getAttribute('data-task-y')):0;
+const x=Number(text.getAttribute('x'))||0,y=Number(text.getAttribute('y'))||0;
+return {text:text.textContent,x:originX+(x-originX)*scale,y:originY+(y-originY)*scale,size:(Number(text.getAttribute('font-size'))||12)*scale,fill:text.getAttribute('fill')||'#111',anchor:text.getAttribute('text-anchor')||'start'};
+});texts.forEach(text=>text.remove());
       for(const image of svg.querySelectorAll('image')){const href=image.getAttribute('href')||image.getAttributeNS('http://www.w3.org/1999/xlink','href');if(href&&!href.startsWith('data:')){const response=await fetch(new URL(href,location.href));if(!response.ok)throw Error('Ein Bild konnte nicht geladen werden.');image.setAttribute('href',await dataURL(await response.blob()));image.removeAttributeNS('http://www.w3.org/1999/xlink','href')}}
       svg.setAttribute('width',vb[2]);svg.setAttribute('height',vb[3]);
       const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(svg)],{type:'image/svg+xml'}));
@@ -47,3 +52,4 @@ window.LerngartenFont = (() => {
   }
   return {ready,get active(){return active},get id(){return record?.id},get name(){return record?.name},get loaded(){return !!record},measure,esc,pdf};
 })();
+

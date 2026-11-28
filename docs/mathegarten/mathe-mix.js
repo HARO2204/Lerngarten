@@ -1,9 +1,9 @@
 const MathMix=(()=>{
-const types={add:'Plusaufgaben',sub:'Minusaufgaben',mul:'Malaufgaben',div:'Geteiltaufgaben',mulGap:'Malaufgaben mit Lücke',divGap:'Geteiltaufgaben mit Lücke',dots:'Punktebilder · Malrechnen',family:'Aufgabenfamilien · Mal und Geteilt',jumps:'Malrechnen am Zahlenstrahl',missing:'Ergänzungsaufgaben',neighbors:'Nachbarzahlen',sequence:'Zahlenfolgen',snake:'Kopfrechenschlangen',house:'Mathehäuser',pyramid:'Zahlenpyramiden',lovers:'Verliebte Zahlen · zur 10',story:'Sachaufgaben'};
-const defaults=()=>({version:1,max:100,level:2,seed:1,shuffle:false,answerSnake:false,fontScale:1,gapPosition:'mixed',gapDots:false,tables:[2,4,5],counts:{add:4,sub:4,mul:2,div:2,mulGap:0,divGap:0,dots:0,family:0,jumps:0,missing:2,neighbors:0,sequence:0,snake:1,house:1,pyramid:1,lovers:0,story:0}});
+const types={add:'Plusaufgaben',sub:'Minusaufgaben',mul:'Malaufgaben',div:'Geteiltaufgaben',mulGap:'Malaufgaben mit Lücke',divGap:'Geteiltaufgaben mit Lücke',dots:'Punktebilder · Malrechnen',family:'Aufgabenfamilien · Mal und Geteilt',jumps:'Malrechnen am Zahlenstrahl',missing:'Ergänzungsaufgaben',neighbors:'Nachbarzahlen',sequence:'Zahlenfolgen',snake:'Kopfrechenschlangen',house:'Mathehäuser',pyramid:'Zahlenpyramiden',lovers:'Verliebte Zahlen · zur 10',story:'Sachaufgaben · Plus und Minus',mulStory:'Malgeschichten',shareStory:'Geteiltgeschichten · Verteilen',groupStory:'Geteiltgeschichten · Gruppen bilden'};
+const defaults=()=>({version:1,max:100,level:2,seed:1,shuffle:false,answerSnake:false,fontScale:1,gapPosition:'mixed',gapDots:false,tables:[2,4,5],counts:{add:4,sub:4,mul:2,div:2,mulGap:0,divGap:0,dots:0,family:0,jumps:0,missing:2,neighbors:0,sequence:0,snake:1,house:1,pyramid:1,lovers:0,story:0,mulStory:0,shareStory:0,groupStory:0}});
 function normalize(s){
 if(!s||typeof s!=='object'||!s.counts||typeof s.counts!=='object')return s;
-return {...s,gapPosition:s.gapPosition===undefined?'mixed':s.gapPosition,gapDots:s.gapDots===undefined?false:s.gapDots,fontScale:s.fontScale===undefined?1:s.fontScale,answerSnake:s.answerSnake===undefined?false:s.answerSnake,tables:s.tables===undefined?[2,4,5]:s.tables,counts:{mul:0,div:0,mulGap:0,divGap:0,dots:0,family:0,jumps:0,...s.counts}};
+return {...s,gapPosition:s.gapPosition===undefined?'mixed':s.gapPosition,gapDots:s.gapDots===undefined?false:s.gapDots,fontScale:s.fontScale===undefined?1:s.fontScale,answerSnake:s.answerSnake===undefined?false:s.answerSnake,tables:s.tables===undefined?[2,4,5]:s.tables,counts:{mul:0,div:0,mulGap:0,divGap:0,dots:0,family:0,jumps:0,mulStory:0,shareStory:0,groupStory:0,...s.counts}};
 }
 function valid(s){s=normalize(s);return !!s&&s.version===1&&[10,20,50,100,1000].includes(s.max)&&[1,2,3].includes(s.level)&&Number.isInteger(s.seed)&&typeof s.shuffle==='boolean'&&typeof s.answerSnake==='boolean'&&typeof s.gapDots==='boolean'&&['a','b','result','mixed'].includes(s.gapPosition)&&[1,1.2,1.4].includes(s.fontScale)&&Array.isArray(s.tables)&&s.tables.length>0&&s.tables.every(n=>Number.isInteger(n)&&n>=1&&n<=10)&&new Set(s.tables).size===s.tables.length&&s.counts&&Object.keys(s.counts).every(k=>Object.hasOwn(types,k))&&Object.keys(types).every(k=>Number.isInteger(s.counts[k])&&s.counts[k]>=0&&s.counts[k]<=20)&&Object.values(s.counts).reduce((a,n)=>a+n,0)>=1&&Object.values(s.counts).reduce((a,n)=>a+n,0)<=60}
 function build(s){s=normalize(s);if(s&&Array.isArray(s.tables)&&s.tables.length===0)throw Error('Wähle mindestens eine Einmaleinsreihe.');if(!valid(s))throw Error('Wähle insgesamt 1 bis 60 Aufgaben, je Aufgabenart höchstens 20.');let seed=s.seed;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296},int=(a,b)=>a+Math.floor(random()*(b-a+1)),pick=a=>a[int(0,a.length-1)],tasks=[];
@@ -11,7 +11,7 @@ const facts=[];
 for(const table of s.tables)for(let factor=1;factor<=10;factor++){
 if(table*factor<=s.max)facts.push({table,factor});
 }
-if((s.counts.mul||s.counts.div||s.counts.mulGap||s.counts.divGap||s.counts.dots||s.counts.family||s.counts.jumps)&&!facts.length)throw Error('Für diese Reihen ist der Zahlenraum zu klein. Wähle einen größeren Zahlenraum oder eine kleinere Reihe.');
+if((s.counts.mul||s.counts.div||s.counts.mulGap||s.counts.divGap||s.counts.dots||s.counts.family||s.counts.jumps||s.counts.mulStory||s.counts.shareStory||s.counts.groupStory)&&!facts.length)throw Error('Für diese Reihen ist der Zahlenraum zu klein. Wähle einen größeren Zahlenraum oder eine kleinere Reihe.');
 function equation(op){for(let i=0;i<100;i++){const a=int(0,s.max),limit=op==='+'?s.max-a:a;if(limit<1)continue;const b=int(1,s.level===1?Math.min(9,limit):limit),result=op==='+'?a+b:a-b,easy=op==='+'?a%10+b%10<10:a%10>=b%10;if(s.level===1&&!easy)continue;return{a,b,result,op}}return{a:1,b:1,result:op==='+'?2:0,op}}
 for(const [type,count]of Object.entries(s.counts))for(let j=0;j<count;j++){let t={type};
 if(type==='family'){
@@ -27,6 +27,31 @@ const division=type==='div'||type==='divGap';
 Object.assign(t,!division?{a:factor,b:table,result:factor*table,op:'·'}:{a:factor*table,b:table,result:factor,op:':'});
 t.slot=['mulGap','divGap'].includes(type)?(s.gapPosition==='mixed'?pick(['a','b']):s.gapPosition):'result';
 if(['mulGap','divGap'].includes(type)){t.pictureRows=factor;t.pictureColumns=table;}
+}
+if(['mulStory','shareStory','groupStory'].includes(type)){
+const {factor,table}=pick(facts),total=factor*table;
+const context=pick([
+{one:'Beutel',many:'Beutel',each:'jedem Beutel',into:'jeden Beutel',a:'Ein Beutel',itemOne:'Murmel',itemMany:'Murmeln'},
+{one:'Tüte',many:'Tüten',each:'jeder Tüte',into:'jede Tüte',a:'Eine Tüte',itemOne:'Keks',itemMany:'Kekse'},
+{one:'Becher',many:'Becher',each:'jedem Becher',into:'jeden Becher',a:'Ein Becher',itemOne:'Stift',itemMany:'Stifte'}
+]);
+const things=n=>n+' '+(n===1?context.itemOne:context.itemMany);
+const groups=n=>n+' '+(n===1?context.one:context.many);
+if(type==='mulStory'){
+Object.assign(t,{a:factor,b:table,result:total,op:'·',pictureGroups:factor,pictureItems:table});
+t.question='Es gibt '+groups(factor)+'. In '+context.each+' '+(table===1?'ist ':'sind ')+things(table)+'. Wie viele '+context.itemMany+' sind es insgesamt?';
+t.response='Es '+(total===1?'ist ':'sind ')+things(total)+' insgesamt.';
+}else if(type==='shareStory'){
+Object.assign(t,{a:total,b:table,result:factor,op:':',pictureGroups:table,pictureItems:factor});
+t.question='Verteile '+things(total)+' gleichmäßig auf '+groups(table)+'. Wie viele '+context.itemMany+' kommen in '+context.into+'?';
+t.response=context.a+' enthält '+things(factor)+'.';
+}else{
+Object.assign(t,{a:total,b:table,result:factor,op:':',pictureGroups:factor,pictureItems:table});
+t.question='Du hast '+things(total)+'. In '+context.into+' '+(table===1?'kommt ':'kommen ')+things(table)+'. Wie viele '+context.many+' kannst du füllen?';
+t.response='Du kannst '+groups(factor)+' füllen.';
+}
+t.pictureCaption='Die Rahmen zeigen die '+context.many+', die Punkte die '+context.itemMany+'.';
+t.slot='result';
 }
 if(['add','sub','missing','story'].includes(type)){Object.assign(t,equation(type==='add'?'+':type==='sub'?'-':pick(['+','-'])));t.slot=type==='missing'?pick(['a','b']):'result';if(type==='story')t.question=t.op==='+'?'Für eine Themenwand liegen '+t.a+' Bildkarten bereit. Es kommen '+t.b+' dazu. Wie viele sind es jetzt?':'In einer Box liegen '+t.a+' Stifte. '+t.b+' werden herausgenommen. Wie viele bleiben?'}
 if(type==='neighbors')t.value=int(1,s.max-1);
@@ -64,7 +89,7 @@ p.text(position.x,position.y+5,position.value,13,true,'#203d36','middle');
 }
 }
 function pages(model,solutions=false,title='Mein Mathe-Mix'){const all=[],s=model.s,scale=s.fontScale||1,subtitle='Zahlenraum 0 bis '+s.max+' · '+['Mit viel Hilfe','Mit wenig Hilfe','Selbstständig'][s.level-1];for(const answer of solutions?[false,true]:[false]){let p=MathA4.page(title,subtitle,{solution:answer}),y=151,pending=0,col=0,pageNumber=1,pageValues=[];const contentBottom=s.answerSnake?640:750;function flush(){if(col){y+=pending+14;col=0;pending=0}}function finish(){flush();if(s.answerSnake)solutionSnake(p,pageValues,s.seed+pageNumber);p.text(40,774,answer?'Lösungen zum selben Aufgabenblatt.':'___ Ich habe meine Ergebnisse überprüft.',9);all.push(p.finish())}function newPage(){finish();pageNumber++;p=MathA4.page(title,subtitle,{solution:answer,continuation:true});y=151;pending=0;col=0;pageValues=[]}
-for(const t of model.tasks){const full=scale>1||['snake','sequence','story','family','jumps'].includes(t.type),baseHeight=['mulGap','divGap'].includes(t.type)&&s.gapDots?244:t.type==='jumps'?228:t.type==='family'?246:t.type==='dots'?244:t.type==='snake'?100:t.type==='sequence'?66:t.type==='house'?191:t.type==='pyramid'?160:t.type==='lovers'?131:t.type==='story'?MathA4.wrap(t.index+'. '+t.question,515/scale,12.5).length*17.5+82:64,height=baseHeight*scale;if(full)flush();if(y+height>contentBottom)newPage();if(['add','sub','mul','div','mulGap','divGap','dots','missing'].includes(t.type))pageValues.push(t.slot==='a'?t.a:t.slot==='b'?t.b:t.result);const x=40+(full?0:col*265),w=(full?515:250)/scale;p.beginGroup(x,y,scale);const titles={add:'Rechne plus.',sub:'Rechne minus.',mul:'Rechne mal.',div:'Rechne geteilt.',mulGap:'Ergänze die Malaufgabe.',divGap:'Ergänze die Geteiltaufgabe.',dots:'Zähle die Reihen und rechne mal.',family:'Finde die Aufgabenfamilie.',jumps:'Rechne mit gleich großen Sprüngen.',missing:'Ergänze.',neighbors:'Vorher und nachher.',sequence:'Setze die Folge fort.',snake:'Rechne im Kopf weiter.',house:'Jede Etage ergibt die Dachzahl.',pyramid:'Oben steht die Summe der zwei Steine darunter.',lovers:'Zusammen sind wir 10.',story:'Lies und rechne.'};p.para(x,y,t.index+'. '+titles[t.type],w,t.type==='pyramid'?10.5:11.5,true,1.25);
+for(const t of model.tasks){const full=scale>1||['snake','sequence','story','family','jumps','mulStory','shareStory','groupStory'].includes(t.type),baseHeight=['mulStory','shareStory','groupStory'].includes(t.type)?MathA4.wrap(t.question,515/scale,13).length*18.2+224:['mulGap','divGap'].includes(t.type)&&s.gapDots?244:t.type==='jumps'?228:t.type==='family'?246:t.type==='dots'?244:t.type==='snake'?100:t.type==='sequence'?66:t.type==='house'?191:t.type==='pyramid'?160:t.type==='lovers'?131:t.type==='story'?MathA4.wrap(t.index+'. '+t.question,515/scale,12.5).length*17.5+82:64,height=baseHeight*scale;if(full)flush();if(y+height>contentBottom)newPage();if(['add','sub','mul','div','mulGap','divGap','dots','missing'].includes(t.type))pageValues.push(t.slot==='a'?t.a:t.slot==='b'?t.b:t.result);const x=40+(full?0:col*265),w=(full?515:250)/scale;p.beginGroup(x,y,scale);const titles={add:'Rechne plus.',sub:'Rechne minus.',mul:'Rechne mal.',div:'Rechne geteilt.',mulGap:'Ergänze die Malaufgabe.',divGap:'Ergänze die Geteiltaufgabe.',dots:'Zähle die Reihen und rechne mal.',family:'Finde die Aufgabenfamilie.',jumps:'Rechne mit gleich großen Sprüngen.',missing:'Ergänze.',neighbors:'Vorher und nachher.',sequence:'Setze die Folge fort.',snake:'Rechne im Kopf weiter.',house:'Jede Etage ergibt die Dachzahl.',pyramid:'Oben steht die Summe der zwei Steine darunter.',lovers:'Zusammen sind wir 10.',story:'Lies und rechne.',mulStory:'Lies die Malgeschichte.',shareStory:'Verteile gleichmäßig.',groupStory:'Bilde gleich große Gruppen.'};p.para(x,y,t.index+'. '+titles[t.type],w,t.type==='pyramid'?10.5:11.5,true,1.25);
 if(['add','sub','mul','div','mulGap','divGap','missing'].includes(t.type)){const text=(t.slot==='a'&&!answer?'____':t.a)+' '+t.op+' '+(t.slot==='b'&&!answer?'____':t.b)+' = '+(t.slot==='result'&&!answer?'____':t.result);p.text(x,y+(['mulGap','divGap'].includes(t.type)&&s.gapDots?231:39),text,Math.min(19,w/Math.max(1,MathA4.width(text,1))),false)}
 if(['mulGap','divGap'].includes(t.type)&&s.gapDots){
 for(let row=0;row<t.pictureRows;row++)for(let column=0;column<t.pictureColumns;column++)p.circle(x+24+column*15,y+37+row*15,3,'#345e48');
@@ -120,11 +145,32 @@ if(t.type==='snake'){const box=Math.min(61,(w-4*28)/5),gap=(w-5*box)/4,top=y+37;
 if(t.type==='house'){const left=x+25,ww=200,top=y+54;p.path(`M ${left} ${top} L ${left+ww/2} ${top-30} L ${left+ww} ${top} Z`,'#839679',1,'#edf2e5');p.text(left+ww/2,top-8,t.total,16,true,'#243e35','middle');for(let r=0;r<4;r++)for(let c=0;c<2;c++){p.rect(left+c*ww/2,top+r*28,ww/2,28);const given=c===r%2||(s.level===1&&r===0);p.text(left+(c+.5)*ww/2,top+r*28+20,answer||given?t.rows[r][c]:'___',15,false,'#243e35','middle')}}
 if(t.type==='pyramid'){const bw=68,bh=31,top=y+41,left=x+17;const rows=[[t.top],t.mid,t.base];for(let r=0;r<3;r++)for(let c=0;c<rows[r].length;c++){const xx=left+(2-r)*bw/2+c*bw,yy=top+r*bh;p.rect(xx,yy,bw,bh,'#f4f6ec');const shown=answer||(s.level<3?r===2||(s.level===1&&r===1&&c===0):r===0||(r===2&&c!==1));p.text(xx+bw/2,yy+22,shown?rows[r][c]:'___',15,false,'#243e35','middle')}}
 if(t.type==='lovers'){const cx=x+125,top=y+32;p.path(`M ${cx} ${top+73} C ${cx-105} ${top+20} ${cx-55} ${top-24} ${cx} ${top+9} C ${cx+55} ${top-24} ${cx+105} ${top+20} ${cx} ${top+73} Z`,'#a06d78',1,'#f7e6e9');p.line(cx,top+12,cx,top+58,'#b88991',.6,'2 2');p.text(cx-29,top+38,t.left,19,true,'#6a3e48','middle');p.text(cx+29,top+38,answer?t.right:'___',19,true,'#6a3e48','middle')}
+if(['mulStory','shareStory','groupStory'].includes(t.type)){
+let yy=p.para(x,y+27,t.question,w,13)+10;
+if(answer||s.level===1){
+const columns=5,cellWidth=Math.min(94,(w-16)/columns),rows=Math.ceil(t.pictureGroups/columns);
+for(let group=0;group<t.pictureGroups;group++){
+const xx=x+4+(group%columns)*cellWidth,top=yy+Math.floor(group/columns)*46;
+p.rect(xx,top,cellWidth-7,39,'#f4f6ec','#92a084',4);
+for(let item=0;item<t.pictureItems;item++)p.circle(xx+10+(item%5)*8,top+12+Math.floor(item/5)*10,2.3);
+}
+yy+=rows*46+10;
+yy=p.para(x,yy,t.pictureCaption,w,10.5)+10;
+}else{
+p.text(x,yy,s.level===2?'Zeichne eine Skizze mit gleichen Gruppen.':'Platz für deinen Rechenweg:',11);
+yy+=88;
+}
+const shown=answer?t.a+' '+t.op+' '+t.b+' = '+t.result:s.level===1?t.a+' '+t.op+' '+t.b+' = ____':'';
+p.text(x,yy,'Rechnung: '+shown,14);
+p.line(x,yy+9,x+w,yy+9);
+p.para(x,yy+36,answer?'Antwort: '+t.response:'Antwort: ___________________________________',w,12.5);
+}
 if(t.type==='story'){let yy=p.para(x,y+26,t.question,w,12.5)+8;p.text(x,yy,'Rechnung: '+(answer?t.a+' '+t.op+' '+t.b+' = '+t.result:''),12.5);p.line(x,yy+9,x+w,yy+9);p.text(x,yy+36,answer?'Antwort: Es '+(t.result===1?'ist ':'sind ')+t.result+(t.op==='+'?(t.result===1?' Bildkarte.':' Bildkarten.'):(t.result===1?' Stift.':' Stifte.')):'Antwort:',12.5);p.line(x,yy+46,x+w,yy+46)}
 p.endGroup();if(full)y+=height+15;else{pending=Math.max(pending,height);col++;if(col===2)flush()}}
 finish()}return all}
 return{types,defaults,normalize,valid,build,pages};
 })();
+
 
 
 

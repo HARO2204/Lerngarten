@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strecke, Strahl und Gerade · Mathegarten</title>
+<style>
+:root{--ink:#294a39;--green:#3e6247;--line:#cbd7c4}*{box-sizing:border-box}body{margin:0;background:#f9f8f2;color:var(--ink);font:16px/1.5 Arial,sans-serif}header,main{max-width:1200px;margin:auto;padding:24px}header{border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:center;flex-wrap:wrap}a{color:var(--green)}h1{font:38px/1.2 Georgia,serif}.controls{background:#edf1e4;border-radius:12px;padding:20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}label{font-weight:bold}select,button{font:inherit;border:1px solid #a9b99d;border-radius:7px;padding:9px 12px;background:white;color:var(--ink)}button{cursor:pointer}.primary{background:var(--green);color:white}.check{font-weight:normal}.check input{width:18px;height:18px;vertical-align:middle}.sheet{max-width:794px;background:white;margin:24px auto;box-shadow:0 2px 15px #294a3920}.sheet svg{display:block;width:100%;height:auto}#status{min-height:24px}:focus-visible{outline:3px solid #b49337;outline-offset:3px}@page{size:A4 portrait;margin:0}@media print{header,h1,.intro,.controls,#status{display:none!important}body{background:white}main{padding:0;max-width:none}.sheet{width:210mm;height:297mm;margin:0;box-shadow:none;break-after:page}.sheet:last-child{break-after:auto}}
+</style>
+<script src="../schriften/eigene-schrift.js?v=2"></script>
+<script src="a4-mathe.js?v=4"></script>
+<script src="geometrie.js" defer></script>
+</head>
+<body>
+<header><strong>Mathegarten</strong><a href="./">Zum Mathe-Mix</a><a href="lineal/">Forschen mit dem Lineal</a></header>
+<main>
+<h1>Strecke, Strahl und Gerade</h1>
+<p class="intro">Erkennen, zuordnen und mit dem Lineal zeichnen. Drei A4-Arbeitsblätter mit passenden Lösungsseiten. Die Pfeile in den Zeichnungen zeigen, dass eine Linie weitergeht.</p>
+<div class="controls">
+<label for="size">Schriftgröße <select id="size"><option value="14">Standard</option><option value="17">Groß</option><option value="20">Sehr groß</option></select></label>
+<label class="check"><input id="answers" type="checkbox"> Lösungsblätter anhängen</label>
+<button id="pdf" class="primary" type="button">A4-PDF herunterladen</button>
+<button id="print" type="button">Drucken</button>
+</div>
+<p id="status" role="status"></p>
+<div id="preview"></div>
+</main>
+</body>
+</html>
